@@ -1,0 +1,60 @@
+[
+  {
+    "id": "q_para_reportar_1",
+    "modulo": "razonamiento_cuantitativo",
+    "enunciado": "Pregunta con posible error tipográfico en enunciado.",
+    "estado_revision": "en_revision",
+    "motivo_en_revision": "Alcanzó el umbral de 3 reportes de estudiantes",
+    "reportes_recibidos": 4
+  },
+  {
+    "id": "q_approved_test",
+    "modulo": "razonamiento_cuantitativo",
+    "competencia_o_afirmacion": "interpretacion_representacion",
+    "evidencia_asociada": "Evidencia",
+    "tipo_texto_o_contexto": "familiar",
+    "enunciado": "Pregunta aprobada para publicación inmutable.",
+    "opciones": {
+      "A": "1",
+      "B": "2",
+      "C": "3",
+      "D": "4"
+    },
+    "respuesta_correcta": "A",
+    "explicacion": {
+      "por_que_correcta": "ok",
+      "por_que_fallan_distractores": "fallo"
+    },
+    "dificultad": 1,
+    "generado_por_ia": true,
+    "modelo": "gemini-2.5-flash",
+    "version_del_prompt": "v2026.2.1",
+    "fecha": "2026-10-11T12:00:03.323Z",
+    "estado_revision": "aprobada",
+    "rotulo": "pregunta de práctica, no oficial"
+  },
+  {
+    "id": "q_para_reportar_1791719608237",
+    "modulo": "razonamiento_cuantitativo",
+    "enunciado": "Pregunta con posible error tipográfico en enunciado.",
+    "estado_revision": "en_revision",
+    "motivo_en_revision": "Alcanzó el umbral de 3 reportes de estudiantes",
+    "reportes_recibidos": 3
+  },
+  {
+    "id": "q_para_reportar_1791719673906",
+    "modulo": "razonamiento_cuantitativo",
+    "enunciado": "Pregunta con posible error tipográfico en enunciado.",
+    "estado_revision": "en_revision",
+    "motivo_en_revision": "Alcanzó el umbral de 3 reportes de estudiantes",
+    "reportes_recibidos": 3
+  },
+  {
+    "id": "q_para_reportar_1791720003326",
+    "modulo": "razonamiento_cuantitativo",
+    "enunciado": "Pregunta con posible error tipográfico en enunciado.",
+    "estado_revision": "en_revision",
+    "motivo_en_revision": "Alcanzó el umbral de 3 reportes de estudiantes",
+    "reportes_recibidos": 3
+  }
+]

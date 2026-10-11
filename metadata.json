@@ -1,0 +1,6 @@
+{
+  "name": "Saber Pro",
+  "description": "Aplicación de preparación para Saber Pro con diagnóstico, práctica por competencias, simulacro cronometrado, progreso y plan de estudio.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

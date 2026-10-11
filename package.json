@@ -1,0 +1,15 @@
+{
+  "name": "acierta-pro-banco",
+  "version": "1.0.0",
+  "description": "Acierta Pro — Banco: panel docente para generar, revisar y publicar preguntas de práctica de Saber Pro (módulos genéricos)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test": "node --test tests/*.test.js",
+    "build": "echo 'build ok'"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}

@@ -1,0 +1,142 @@
+[
+  {
+    "version": "vTest-1.0.0",
+    "generated_at": "2026-10-11T12:00:03.324Z",
+    "sha256": "7d573c6485b3d23ff517e137a3df7014e34aa6a15b34a8b37b7741469df2435a",
+    "publicado_por": "admin@aciertapro.edu.co",
+    "cantidad_preguntas": 1,
+    "questions": [
+      {
+        "id": "q_approved_test",
+        "modulo": "razonamiento_cuantitativo",
+        "competencia_o_afirmacion": "interpretacion_representacion",
+        "evidencia_asociada": "Evidencia",
+        "tipo_texto_o_contexto": "familiar",
+        "enunciado": "Pregunta aprobada para publicación inmutable.",
+        "opciones": {
+          "A": "1",
+          "B": "2",
+          "C": "3",
+          "D": "4"
+        },
+        "respuesta_correcta": "A",
+        "explicacion": {
+          "por_que_correcta": "ok",
+          "por_que_fallan_distractores": "fallo"
+        },
+        "dificultad": 1,
+        "generado_por_ia": true,
+        "modelo": "gemini-2.5-flash",
+        "version_del_prompt": "v2026.2.1",
+        "fecha": "2026-10-11T12:00:03.323Z",
+        "estado_revision": "aprobada",
+        "rotulo": "pregunta de práctica, no oficial"
+      }
+    ]
+  },
+  {
+    "version": "vTest-1.0.0",
+    "generated_at": "2026-10-11T11:54:33.905Z",
+    "sha256": "fd29e82106cc9532f5eab7a4836354fdcd05f6bbb4db187389133d66f1a231ec",
+    "publicado_por": "admin@aciertapro.edu.co",
+    "cantidad_preguntas": 1,
+    "questions": [
+      {
+        "id": "q_approved_test",
+        "modulo": "razonamiento_cuantitativo",
+        "competencia_o_afirmacion": "interpretacion_representacion",
+        "evidencia_asociada": "Evidencia",
+        "tipo_texto_o_contexto": "familiar",
+        "enunciado": "Pregunta aprobada para publicación inmutable.",
+        "opciones": {
+          "A": "1",
+          "B": "2",
+          "C": "3",
+          "D": "4"
+        },
+        "respuesta_correcta": "A",
+        "explicacion": {
+          "por_que_correcta": "ok",
+          "por_que_fallan_distractores": "fallo"
+        },
+        "dificultad": 1,
+        "generado_por_ia": true,
+        "modelo": "gemini-2.5-flash",
+        "version_del_prompt": "v2026.2.1",
+        "fecha": "2026-10-11T11:54:33.905Z",
+        "estado_revision": "aprobada",
+        "rotulo": "pregunta de práctica, no oficial"
+      }
+    ]
+  },
+  {
+    "version": "vTest-1.0.0",
+    "generated_at": "2026-10-11T11:53:28.236Z",
+    "sha256": "fd4775fbf9d9f89b98283a7ca9015ccbae4085526cb3468227e45fe17d8d5fe5",
+    "publicado_por": "admin@aciertapro.edu.co",
+    "cantidad_preguntas": 1,
+    "questions": [
+      {
+        "id": "q_approved_test",
+        "modulo": "razonamiento_cuantitativo",
+        "competencia_o_afirmacion": "interpretacion_representacion",
+        "evidencia_asociada": "Evidencia",
+        "tipo_texto_o_contexto": "familiar",
+        "enunciado": "Pregunta aprobada para publicación inmutable.",
+        "opciones": {
+          "A": "1",
+          "B": "2",
+          "C": "3",
+          "D": "4"
+        },
+        "respuesta_correcta": "A",
+        "explicacion": {
+          "por_que_correcta": "ok",
+          "por_que_fallan_distractores": "fallo"
+        },
+        "dificultad": 1,
+        "generado_por_ia": true,
+        "modelo": "gemini-2.5-flash",
+        "version_del_prompt": "v2026.2.1",
+        "fecha": "2026-10-11T11:53:28.235Z",
+        "estado_revision": "aprobada",
+        "rotulo": "pregunta de práctica, no oficial"
+      }
+    ]
+  },
+  {
+    "version": "vTest-1.0.0",
+    "generated_at": "2026-10-11T11:53:04.686Z",
+    "sha256": "8de3c125803aab3bee4c50d697318c346456d63132d7f0d3a69962de3a06863f",
+    "publicado_por": "admin@aciertapro.edu.co",
+    "cantidad_preguntas": 1,
+    "questions": [
+      {
+        "id": "q_approved_test",
+        "modulo": "razonamiento_cuantitativo",
+        "competencia_o_afirmacion": "interpretacion_representacion",
+        "evidencia_asociada": "Evidencia",
+        "tipo_texto_o_contexto": "familiar",
+        "enunciado": "Pregunta aprobada para publicación inmutable.",
+        "opciones": {
+          "A": "1",
+          "B": "2",
+          "C": "3",
+          "D": "4"
+        },
+        "respuesta_correcta": "A",
+        "explicacion": {
+          "por_que_correcta": "ok",
+          "por_que_fallan_distractores": "fallo"
+        },
+        "dificultad": 1,
+        "generado_por_ia": true,
+        "modelo": "gemini-2.5-flash",
+        "version_del_prompt": "v2026.2.1",
+        "fecha": "2026-10-11T11:53:04.685Z",
+        "estado_revision": "aprobada",
+        "rotulo": "pregunta de práctica, no oficial"
+      }
+    ]
+  }
+]

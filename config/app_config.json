@@ -1,0 +1,27 @@
+{
+  "app_name": "Acierta Pro — Banco",
+  "version": "1.0.0",
+  "gemini_model": "gemini-2.5-flash",
+  "gemini_model_fallback": "gemini-1.5-flash",
+  "gemini_model_description": "Modelo Flash vigente en AI Studio para generación rápida con salida estructurada JSON",
+  "prompt_version": "v2026.2.1",
+  "authorized_emails": [
+    "proyectoing2026@gmail.com",
+    "docente.saberpro@institucion.edu.co"
+  ],
+  "concurrency_limit": 1,
+  "daily_generation_cap": 250,
+  "daily_generation_cap_nota": "Configurable. Ajustable según cuota del proyecto",
+  "ai_studio_quota_reference": {
+    "tier": "AI Studio Free/Pay-as-you-go",
+    "free_tier_limits": {
+      "rpm": 15,
+      "tpm": 1000000,
+      "rpd": 1500
+    },
+    "estado_cuota": "[por confirmar según suscripción y proyecto en GCP]"
+  },
+  "student_reports_threshold": 3,
+  "essay_feedback_enabled": false,
+  "essay_feedback_status": "Fase 3 — Desactivado por defecto. Requiere consentimiento explícito y rate limit estricto."
+}

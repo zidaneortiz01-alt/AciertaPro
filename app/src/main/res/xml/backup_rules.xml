@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<full-backup-content>
+    <!-- Exclusión estricta de base de datos local y preferencias para proteger datos personales -->
+    <exclude domain="database" path="."/>
+    <exclude domain="sharedpref" path="."/>
+</full-backup-content>

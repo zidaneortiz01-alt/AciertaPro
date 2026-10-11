@@ -1,0 +1,114 @@
+[
+  {
+    "report_id": "652995d6-41d1-4aa2-86e7-bf76e392acc9",
+    "question_id": "q_para_reportar_1",
+    "reason": "Opción ambigua",
+    "details": "Detalle 1",
+    "created_at": "2026-10-11T11:52:39.232Z"
+  },
+  {
+    "report_id": "5bd579f6-ccc6-467a-8eff-aa99ce1986b6",
+    "question_id": "q_para_reportar_1",
+    "reason": "Error de redacción",
+    "details": "Detalle 2",
+    "created_at": "2026-10-11T11:52:39.233Z"
+  },
+  {
+    "report_id": "c078e6e0-62c8-46a0-88bb-52049a79a99a",
+    "question_id": "q_para_reportar_1",
+    "reason": "Respuesta incorrecta",
+    "details": "Detalle 3",
+    "created_at": "2026-10-11T11:52:39.233Z"
+  },
+  {
+    "report_id": "342fd727-9356-4e4b-a0d9-abced66eab00",
+    "question_id": "q_para_reportar_1",
+    "reason": "Opción ambigua",
+    "details": "Detalle 1",
+    "created_at": "2026-10-11T11:53:04.690Z"
+  },
+  {
+    "report_id": "aaf79a6f-3fda-49a9-95e8-879b6ae0bc52",
+    "question_id": "q_para_reportar_1",
+    "reason": "Error de redacción",
+    "details": "Detalle 2",
+    "created_at": "2026-10-11T11:53:04.690Z"
+  },
+  {
+    "report_id": "042152a7-c11b-4a79-b7ba-5e779848150a",
+    "question_id": "q_para_reportar_1",
+    "reason": "Respuesta incorrecta",
+    "details": "Detalle 3",
+    "created_at": "2026-10-11T11:53:04.690Z"
+  },
+  {
+    "report_id": "c2ada1ff-74a1-4f51-9813-7ffb9af99ebd",
+    "question_id": "q_para_reportar_1791719608237",
+    "reason": "Opción ambigua",
+    "details": "Detalle 1",
+    "created_at": "2026-10-11T11:53:28.238Z"
+  },
+  {
+    "report_id": "c6d465fc-6b9a-4997-8155-8afc1ae65834",
+    "question_id": "q_para_reportar_1791719608237",
+    "reason": "Error de redacción",
+    "details": "Detalle 2",
+    "created_at": "2026-10-11T11:53:28.238Z"
+  },
+  {
+    "report_id": "d750231a-75f1-4f2b-9059-3d7fdd0036e6",
+    "question_id": "q_para_reportar_1791719608237",
+    "reason": "Respuesta incorrecta",
+    "details": "Detalle 3",
+    "created_at": "2026-10-11T11:53:28.238Z"
+  },
+  {
+    "report_id": "94b5b078-31f2-4b8c-b1a7-ee16dd97202e",
+    "question_id": "q_approved_test",
+    "reason": "distractor dudoso",
+    "details": "",
+    "created_at": "2026-10-11T11:54:04.695Z"
+  },
+  {
+    "report_id": "45b8c55e-beaa-4cf1-876d-35e27c7fe3b6",
+    "question_id": "q_para_reportar_1791719673906",
+    "reason": "Opción ambigua",
+    "details": "Detalle 1",
+    "created_at": "2026-10-11T11:54:33.907Z"
+  },
+  {
+    "report_id": "e89f01a7-e013-4ecd-a60b-41db2b017797",
+    "question_id": "q_para_reportar_1791719673906",
+    "reason": "Error de redacción",
+    "details": "Detalle 2",
+    "created_at": "2026-10-11T11:54:33.908Z"
+  },
+  {
+    "report_id": "7246b168-7df5-442a-ab44-851ea8c8817c",
+    "question_id": "q_para_reportar_1791719673906",
+    "reason": "Respuesta incorrecta",
+    "details": "Detalle 3",
+    "created_at": "2026-10-11T11:54:33.908Z"
+  },
+  {
+    "report_id": "e9b85781-70bf-4a01-8a90-aa1c9d7e6880",
+    "question_id": "q_para_reportar_1791720003326",
+    "reason": "Opción ambigua",
+    "details": "Detalle 1",
+    "created_at": "2026-10-11T12:00:03.327Z"
+  },
+  {
+    "report_id": "b5a75f84-98e8-4878-8fa6-1080f4bb77cf",
+    "question_id": "q_para_reportar_1791720003326",
+    "reason": "Error de redacción",
+    "details": "Detalle 2",
+    "created_at": "2026-10-11T12:00:03.327Z"
+  },
+  {
+    "report_id": "8c861c0e-4b97-46c0-b244-52ec649702de",
+    "question_id": "q_para_reportar_1791720003326",
+    "reason": "Respuesta incorrecta",
+    "details": "Detalle 3",
+    "created_at": "2026-10-11T12:00:03.327Z"
+  }
+]

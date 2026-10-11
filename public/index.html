@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acierta Pro — Banco | Saber Pro 2026-2</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="app-header">
+    <div class="header-brand">
+      <div class="brand-logo">AP</div>
+      <div>
+        <h1>Acierta Pro — Banco</h1>
+        <p class="subtitle">Panel Docente | Preguntas de Práctica Saber Pro 2026-2 (Módulos Genéricos)</p>
+      </div>
+    </div>
+    <div class="header-auth">
+      <div class="auth-badge authorized" id="authBadge">
+        <span class="status-dot"></span>
+        <span id="currentUserEmail">proyectoing2026@gmail.com</span>
+        <span class="badge-role">Docente Autorizado</span>
+      </div>
+      <button class="btn-subtle btn-sm" id="btnSwitchUser">Cambiar Correo</button>
+    </div>
+  </header>
+
+  <nav class="main-nav">
+    <button class="nav-tab active" data-tab="tab-generate">
+      <span class="tab-icon">⚡</span> Generación por Lotes
+    </button>
+    <button class="nav-tab" data-tab="tab-review">
+      <span class="tab-icon">📋</span> Cola de Borradores (<span id="draftCountBadge">0</span>)
+    </button>
+    <button class="nav-tab" data-tab="tab-published">
+      <span class="tab-icon">🚀</span> Banco Publicado (<span id="publishedCountBadge">0</span>)
+    </button>
+    <button class="nav-tab" data-tab="tab-distribution">
+      <span class="tab-icon">📊</span> Control de Distribución
+    </button>
+    <button class="nav-tab" data-tab="tab-writing">
+      <span class="tab-icon">✍️</span> Comunicación Escrita
+    </button>
+    <button class="nav-tab" data-tab="tab-reports">
+      <span class="tab-icon">⚠️</span> Reportes Estudiantiles
+    </button>
+    <button class="nav-tab" data-tab="tab-config">
+      <span class="tab-icon">⚙️</span> Matriz & Configuración
+    </button>
+  </nav>
+
+  <main class="main-content">
+    <!-- TAB 1: GENERACIÓN POR LOTES -->
+    <section id="tab-generate" class="tab-panel active">
+      <div class="panel-grid">
+        <div class="card form-card">
+          <h2>Generación Asíncrona (Solo Servidor)</h2>
+          <p class="card-desc">Concurrencia fija: 1. Reintentos exponenciales. Salida estructurada estricta. Verificación previa automática.</p>
+          
+          <form id="generateForm">
+            <div class="form-group">
+              <label for="selectModulo">Módulo Genérico Saber Pro</label>
+              <select id="selectModulo" required>
+                <option value="razonamiento_cuantitativo">Razonamiento Cuantitativo (30 preguntas en examen)</option>
+                <option value="lectura_critica">Lectura Crítica (30 preguntas en examen)</option>
+                <option value="competencias_ciudadanas">Competencias Ciudadanas (30 preguntas en examen)</option>
+                <option value="ingles">Inglés (45 preguntas en examen, 7 partes)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="selectCompetencia">Competencia / Afirmación / Parte Oficial</label>
+              <select id="selectCompetencia" required>
+                <!-- Se llena dinámicamente según el módulo seleccionado -->
+              </select>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group flex-1">
+                <label for="selectDificultad">Dificultad Psicométrica</label>
+                <select id="selectDificultad">
+                  <option value="1">Nivel 1 — Básico</option>
+                  <option value="2" selected>Nivel 2 — Medio</option>
+                  <option value="3">Nivel 3 — Avanzado</option>
+                </select>
+              </div>
+
+              <div class="form-group flex-1">
+                <label for="inputCantidad">Cantidad en este Lote (1–10)</label>
+                <input type="number" id="inputCantidad" min="1" max="10" value="2" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="inputEvidencia">Contexto o Evidencia Opcional</label>
+              <input type="text" id="inputEvidencia" placeholder="Ej: familiar/personal, laboral/ocupacional, divulgación científica">
+            </div>
+
+            <div class="generation-notice">
+              <strong>Reglas activas del prompt versionado:</strong>
+              <ul>
+                <li>Pregunta 100% original (cero copias del ICFES).</li>
+                <li>Una sola clave correcta; distractores por errores cognitivos plausibles.</li>
+                <li>Contexto colombiano neutro sin conocimiento especializado.</li>
+                <li>Lectura Crítica: textos con límite estricto de 500 palabras.</li>
+                <li>Opciones por defecto en RC, LC, CC: 4 (A–D) <span class="tag-confirm">[por confirmar]</span>.</li>
+                <li>Inglés: 8 opciones en Parte 1, 3 en Partes 2–5, 4 en Partes 6–7.</li>
+              </ul>
+            </div>
+
+            <button type="submit" class="btn btn-primary" id="btnSubmitGenerate">
+              <span>🚀 Encolar Lote de Generación (Concurrencia 1)</span>
+            </button>
+          </form>
+        </div>
+
+        <div class="card status-card">
+          <h2>Estado de la Cola y Límites de Cuota</h2>
+          <div class="queue-indicators">
+            <div class="indicator-box">
+              <span class="ind-label">Estado de Cola</span>
+              <span class="ind-val" id="queueStatusText">Inactiva</span>
+            </div>
+            <div class="indicator-box">
+              <span class="ind-label">Lotes Pendientes</span>
+              <span class="ind-val" id="queuePendingCount">0</span>
+            </div>
+            <div class="indicator-box">
+              <span class="ind-label">Tope Diario Consumido</span>
+              <span class="ind-val" id="queueDailyCount">0 / 250</span>
+            </div>
+            <div class="indicator-box">
+              <span class="ind-label">Concurrencia</span>
+              <span class="ind-val">1 (Fija)</span>
+            </div>
+          </div>
+
+          <div class="quota-info-box">
+            <h4>Cuotas Vigentes de AI Studio:</h4>
+            <p><strong>Free Tier:</strong> 15 RPM | 1M TPM | 1.500 RPD <span class="tag-confirm">[por confirmar según tier contratado]</span></p>
+            <p class="small text-muted">La aplicación restringe el consumo diario y ejecuta las llamadas secuencialmente para garantizar estabilidad sin saturar la cuota.</p>
+          </div>
+
+          <h3>Lotes Recientes</h3>
+          <div class="recent-batches-list" id="recentBatchesList">
+            <p class="text-muted">No hay lotes encolados recientemente.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 2: COLA DE BORRADORES & REVISIÓN HUMANA -->
+    <section id="tab-review" class="tab-panel">
+      <div class="toolbar">
+        <div class="toolbar-title">
+          <h2>Cola de Borradores para Revisión Docente</h2>
+          <span class="badge" id="reviewCountBadge">0 borradores</span>
+        </div>
+        <div class="toolbar-actions">
+          <select id="filterModuloReview">
+            <option value="">Todos los módulos</option>
+            <option value="razonamiento_cuantitativo">Razonamiento Cuantitativo</option>
+            <option value="lectura_critica">Lectura Crítica</option>
+            <option value="competencias_ciudadanas">Competencias Ciudadanas</option>
+            <option value="ingles">Inglés</option>
+          </select>
+          <button class="btn btn-secondary btn-sm" id="btnRefreshReview">Refrescar</button>
+        </div>
+      </div>
+
+      <div class="questions-stream" id="draftsStream">
+        <!-- Renderizado dinámico de tarjetas de revisión -->
+      </div>
+    </section>
+
+    <!-- TAB 3: BANCO PUBLICADO & VERSIONES -->
+    <section id="tab-published" class="tab-panel">
+      <div class="toolbar">
+        <div class="toolbar-title">
+          <h2>Banco de Preguntas Publicado</h2>
+          <span class="badge badge-success" id="publishedVersionTag">Versión actual: cargando...</span>
+        </div>
+        <div class="toolbar-actions">
+          <button class="btn btn-primary" id="btnOpenPublishModal">Publicar Nueva Versión Inmutable</button>
+        </div>
+      </div>
+
+      <div class="hash-banner" id="publishedHashBanner">
+        <div class="hash-icon">🔒</div>
+        <div class="hash-info">
+          <strong>Huella Criptográfica SHA-256 del Banco Publicado:</strong>
+          <code id="currentSha256Value">Calculando...</code>
+          <p class="small">Inmutable. Garantiza integridad del contenido publicado para consumo de clientes y estudiantes.</p>
+        </div>
+      </div>
+
+      <div class="api-endpoints-showcase">
+        <h3>Endpoints Públicos de Solo Lectura:</h3>
+        <div class="endpoint-chip">
+          <span class="method">GET</span> <code>/api/v1/bank/version</code>
+          <span class="desc">Versión, fecha y SHA-256</span>
+          <a href="/api/v1/bank/version" target="_blank" class="btn-link">Probar ↗</a>
+        </div>
+        <div class="endpoint-chip">
+          <span class="method">GET</span> <code>/api/v1/bank/latest</code>
+          <span class="desc">JSON con preguntas aprobadas y metadatos públicos</span>
+          <a href="/api/v1/bank/latest" target="_blank" class="btn-link">Probar ↗</a>
+        </div>
+      </div>
+
+      <div class="questions-stream" id="publishedStream">
+        <!-- Preguntas aprobadas y publicadas -->
+      </div>
+    </section>
+
+    <!-- TAB 4: CONTROL DE DISTRIBUCIÓN -->
+    <section id="tab-distribution" class="tab-panel">
+      <div class="toolbar">
+        <h2>Control de Distribución vs. Matriz Oficial Saber Pro 2026-2</h2>
+        <button class="btn btn-secondary btn-sm" id="btnRefreshDistribution">Actualizar Métricas</button>
+      </div>
+
+      <div class="distribution-grid" id="distributionContainer">
+        <!-- Tarjetas de desviaciones por módulo y competencia -->
+      </div>
+
+      <div class="card key-balance-card">
+        <h3>Balance de Posición de Clave Correcta (A–D)</h3>
+        <p class="card-desc">Verifica que las respuestas correctas no estén sesgadas hacia una letra en particular.</p>
+        <div class="key-balance-bars" id="keyBalanceBars">
+          <!-- Barras de A, B, C, D -->
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 5: COMUNICACIÓN ESCRITA -->
+    <section id="tab-writing" class="tab-panel">
+      <div class="toolbar">
+        <div class="toolbar-title">
+          <h2>Banco de Temas de Comunicación Escrita</h2>
+          <p class="small">Formulación estándar: "¿Está de acuerdo con la afirmación A?" sobre temas de dominio público.</p>
+        </div>
+        <button class="btn btn-primary btn-sm" id="btnNewTopic">Agregar Nuevo Tema</button>
+      </div>
+
+      <div class="writing-topics-grid" id="writingTopicsGrid">
+        <!-- Renderizado de temas -->
+      </div>
+
+      <div class="card essay-feedback-card">
+        <div class="phase-header">
+          <h3>Servicio Experimental de Retroalimentación de Ensayos</h3>
+          <span class="tag-phase" id="essayServiceStatusBadge">Fase 3 — Desactivado por defecto</span>
+        </div>
+        <p class="card-desc">
+          Endpoint <code>POST /api/v1/essay-feedback</code>. Devuelve retroalimentación cualitativa por Planteamiento, Organización, Forma de expresión y Pertinencia.
+          <strong>No devuelve puntaje 0–300. No guarda datos. Exige consentimiento y rate limit.</strong>
+        </p>
+
+        <div class="toggle-container">
+          <label class="switch">
+            <input type="checkbox" id="toggleEssayFeedback">
+            <span class="slider"></span>
+          </label>
+          <span id="essayToggleLabel">Habilitar endpoint experimental (Fase 3)</span>
+        </div>
+
+        <div class="essay-tester-box">
+          <h4>Probador de Retroalimentación:</h4>
+          <textarea id="testerEssayText" rows="4" placeholder="Escribe un ensayo de prueba (mínimo 50 palabras)..."></textarea>
+          <div class="consent-row">
+            <label>
+              <input type="checkbox" id="testerConsentCheck"> Confirmo consentimiento explícito para procesar este texto con fines formativos sin almacenamiento (consent: true).
+            </label>
+          </div>
+          <button class="btn btn-secondary" id="btnTestEssayFeedback">Enviar al Endpoint /api/v1/essay-feedback</button>
+          <div class="feedback-result" id="essayFeedbackResult" style="display:none;"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 6: REPORTES ESTUDIANTILES -->
+    <section id="tab-reports" class="tab-panel">
+      <div class="toolbar">
+        <div class="toolbar-title">
+          <h2>Reportes Estudiantiles Anónimos</h2>
+          <p class="small">Endpoint <code>POST /api/v1/reports</code>. Sin datos personales. Al alcanzar 3 reportes, la pregunta pasa automáticamente a "en revisión".</p>
+        </div>
+      </div>
+
+      <div class="reports-simulation-card card">
+        <h3>Simular Envío de Reporte Estudiantil (Prueba de Endpoint)</h3>
+        <div class="form-row">
+          <input type="text" id="reportSimQuestionId" placeholder="ID de la pregunta (ej: rc_seed_001)">
+          <select id="reportSimReason">
+            <option value="error_enunciado">Error tipográfico o de redacción</option>
+            <option value="clave_dudosa">Respuesta correcta dudosa o ambigua</option>
+            <option value="distractor_invalido">Distractores incorrectos</option>
+            <option value="otro">Otro problema técnico</option>
+          </select>
+          <button class="btn btn-warning" id="btnSimulateReport">Enviar Reporte Anónimo</button>
+        </div>
+        <p class="small text-muted" id="reportSimMessage"></p>
+      </div>
+
+      <h3>Preguntas Actualmente Retiradas a "En Revisión"</h3>
+      <div class="questions-stream" id="underReviewStream">
+        <!-- Preguntas en revisión -->
+      </div>
+    </section>
+
+    <!-- TAB 7: CONFIGURACIÓN & MATRIZ OFICIAL -->
+    <section id="tab-config" class="tab-panel">
+      <div class="panel-grid">
+        <div class="card">
+          <h2>Configuración General de la Aplicación</h2>
+          <form id="appConfigForm">
+            <div class="form-group">
+              <label>Modelo Gemini Vigente en AI Studio</label>
+              <input type="text" id="cfgModel" required>
+              <span class="small text-muted">Configurable en archivo, no fijo en el código.</span>
+            </div>
+
+            <div class="form-group">
+              <label>Correos Docentes Autorizados (Separados por coma)</label>
+              <textarea id="cfgAuthorizedEmails" rows="3" required></textarea>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group flex-1">
+                <label>Tope Diario de Generación</label>
+                <input type="number" id="cfgDailyCap" min="1" max="1500" required>
+              </div>
+
+              <div class="form-group flex-1">
+                <label>Umbral de Reportes para Retiro</label>
+                <input type="number" id="cfgReportThreshold" min="1" max="20" required>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Guardar Configuración</button>
+          </form>
+        </div>
+
+        <div class="card">
+          <h2>Matriz Oficial Saber Pro 2026-2 (ICFES)</h2>
+          <p class="card-desc">Configuración versionada y editable en <code>config/matrix_config.json</code>.</p>
+          <textarea id="matrixJsonEditor" rows="16" class="code-editor"></textarea>
+          <button class="btn btn-secondary mt-2" id="btnSaveMatrix">Guardar Matriz Versionada</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- MODAL DE PUBLICACIÓN -->
+  <div class="modal" id="publishModal">
+    <div class="modal-content">
+      <h3>Publicar Nueva Versión Inmutable del Banco</h3>
+      <p>Se congelarán todas las preguntas en estado <strong>"aprobada"</strong> y se calculará su huella criptográfica SHA-256 única.</p>
+      <div class="form-group">
+        <label>Etiqueta de Versión</label>
+        <input type="text" id="inputVersionTag" placeholder="Ej: v2026.2.1">
+      </div>
+      <div class="modal-buttons">
+        <button class="btn btn-secondary" id="btnClosePublishModal">Cancelar</button>
+        <button class="btn btn-primary" id="btnConfirmPublish">Confirmar y Publicar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

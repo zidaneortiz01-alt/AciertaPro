@@ -1,0 +1,437 @@
+[
+  {
+    "id_pregunta": "LC-001",
+    "modulo": "lectura_critica",
+    "competencia_tema": "identificacion_tesis",
+    "enunciado": "En un ensayo sobre la educación contemporánea, el autor afirma: 'La memorización pasiva de datos ha dejado de ser una virtud pedagógica; en una sociedad saturada de información inmediata, la habilidad crítica para discernir la veracidad y relevancia de las fuentes constituye el verdadero pilar del pensamiento reflexivo'.\n\n¿Cuál es la tesis central sostenida por el autor en este fragmento?",
+    "tipo_pregunta": "seleccion_multiple_unica",
+    "opciones": {
+      "A": "La tecnología digital impide que los estudiantes desarrollen una memoria adecuada a largo plazo.",
+      "B": "El criterio para evaluar y filtrar información es hoy más fundamental que la simple retención de datos.",
+      "C": "Los centros educativos deben suprimir cualquier evaluación cuantitativa de conocimientos.",
+      "D": "La saturación de datos en internet conduce inevitablemente a la desinformación colectiva."
+    },
+    "respuesta_correcta": "B",
+    "explicacion": "La opción B sintetiza la postura central del autor: contrapone la memorización pasiva con la capacidad crítica de discernir fuentes en la era actual, considerándola el auténtico pilar pedagógico. Las opciones A y D introducen conclusiones pesimistas no afirmadas en el texto. La opción C propone una medida radical sobre evaluaciones que excede lo expuesto por el fragmento.",
+    "dificultad": 2,
+    "fuente_version": {
+      "origen": "original",
+      "guia": "2026-2 (por confirmar)",
+      "fecha": "2026-10"
+    },
+    "estado_revision": "borrador"
+  },
+  {
+    "id_pregunta": "LC-002",
+    "modulo": "lectura_critica",
+    "competencia_tema": "relaciones_entre_partes",
+    "enunciado": "Considere las dos siguientes oraciones de un artículo sobre transición energética:\n[1] 'La adopción de fuentes renovables como la solar y la eólica ha experimentado un crecimiento sin precedentes en la última década'.\n[2] 'Sin embargo, la falta de infraestructura de almacenamiento masivo y la dependencia de minerales críticos plantean serios desafíos de estabilidad para las redes eléctricas'.\n\n¿Qué relación lógica establece el conector 'Sin embargo' entre ambas oraciones?",
+    "tipo_pregunta": "seleccion_multiple_unica",
+    "opciones": {
+      "A": "Presenta una causa que explica el éxito acelerado de las fuentes renovables.",
+      "B": "Introduce una consecuencia directa y favorable del despliegue tecnológico previo.",
+      "C": "Introduce un matiz de restricción o dificultad que matiza el optimismo de la primera afirmación.",
+      "D": "Refuta completamente la veracidad del crecimiento energético expuesto en [1]."
+    },
+    "respuesta_correcta": "C",
+    "explicacion": "El conector adversativo 'Sin embargo' introduce una limitación o contraste respecto a la idea anterior sin anular su veracidad: reconoce el avance de las energías limpias, pero expone los obstáculos técnicos que condicionan su funcionamiento óptimo. Las opciones A y B confunden adversación con causalidad o consecuencia positiva, y la opción D exagera una refutación absoluta inexistente.",
+    "dificultad": 1,
+    "fuente_version": {
+      "origen": "original",
+      "guia": "2026-2 (por confirmar)",
+      "fecha": "2026-10"
+    },
+    "estado_revision": "borrador"
+  },
+  {
+    "id_pregunta": "LC-003",
+    "modulo": "lectura_critica",
+    "competencia_tema": "evaluacion_argumentos",
+    "enunciado": "Un columnista afirma: 'Es indiscutible que los vehículos autónomos eliminarán por completo los accidentes de tránsito en los próximos cinco años, dado que los algoritmos de navegación nunca cometen errores de juicio ni sufren fatiga como los seres humanos'.\n\n¿Cuál de las siguientes observaciones señala la mayor debilidad en el argumento del autor?",
+    "tipo_pregunta": "seleccion_multiple_unica",
+    "opciones": {
+      "A": "Asume erróneamente que las máquinas operan en un entorno exento de fallas de sensores, condiciones climáticas imprevistas o dilemas no programados.",
+      "B": "Omite señalar que la fabricación de automóviles genera altos costos de combustible fósil en países en desarrollo.",
+      "C": "No detalla el precio de venta sugerido al público de cada modelo autónomo.",
+      "D": "Desconoce que los conductores humanos prefieren rutas con paisajes turísticos."
+    },
+    "respuesta_correcta": "A",
+    "explicacion": "El argumento comete una generalización apresurada al asegurar una eliminación del 100% de accidentes en un plazo fijo, ignorando la falibilidad del hardware, factores externos ambientales impredecibles y fallas no anticipadas de software. Las opciones B, C y D desvían la discusión hacia temas secundarios (costos, preferencias turísticas) que no evalúan la solidez lógica del argumento sobre seguridad.",
+    "dificultad": 3,
+    "fuente_version": {
+      "origen": "original",
+      "guia": "2026-2 (por confirmar)",
+      "fecha": "2026-10"
+    },
+    "estado_revision": "borrador"
+  },
+  {
+    "id_pregunta": "LC-004",
+    "modulo": "lectura_critica",
+    "competencia_tema": "reconocimiento_inferencias",
+    "enunciado": "En un informe sociológico se señala: 'En las comunidades pesqueras tradicionales de la alta Guajira, la transmisión oral de los ciclos de mareas y vientos por parte de los mayores ha demostrado una precisión comparable a la de las estaciones meteorológicas satelitales instaladas recientemente'.\n\nDel texto se puede inferir válidamente que:",
+    "tipo_pregunta": "seleccion_multiple_unica",
+    "opciones": {
+      "A": "El conocimiento ancestral acumulado posee un rigor empírico significativo para la navegación local.",
+      "B": "Las estaciones meteorológicas satelitales son obsoletas y deberían ser desmanteladas de inmediato.",
+      "C": "Los pescadores rechazan deliberadamente cualquier herramienta tecnológica de origen moderno.",
+      "D": "Los ciclos de viento son fenómenos totalmente independientes de la posición lunar y las mareas."
+    },
+    "respuesta_correcta": "A",
+    "explicacion": "La comparación explícita entre la precisión de la tradición oral y los satélites respalda la inferencia de que la experiencia ancestral tiene validez empírica demostrada. La opción B plantea una supresión tecnológica exagerada. La opción C atribuye una actitud de rechazo hostil no mencionada. La opción D contradice la correlación astronómica y física natural.",
+    "dificultad": 2,
+    "fuente_version": {
+      "origen": "original",
+      "guia": "2026-2 (por confirmar)",
+      "fecha": "2026-10"
+    },
+    "estado_revision": "borrador"
+  },
+  {
+    "id_pregunta": "RC-001",
+    "modulo": "razonamiento_cuantitativo",
+    "competencia_tema": "porcentajes",
+    "enunciado": "Una biblioteca universitaria adquiere un paquete de licencias de software académico con un valor inicial de $120.000. Durante el primer año, el proveedor aplica un descuento institucional del 20%. Posteriormente, al renovar para el segundo año, la tarifa resultante sufre un incremento del 20% sobre el precio ya descontado.\n\n¿Cuál es el valor final a pagar en la renovación del segundo año?",
+    "tipo_pregunta": "seleccion_multiple_unica",
+    "opciones": {
+      "A": "$120.000",
+      "B": "$115.200",
+      "C": "$96.000",
+      "D": "$124.800"
+    },
+    "respuesta_correcta": "B",
+    "explicacion": "El cálculo paso a paso es: 1) Con el 20% de descuento, el costo es $120.000 × (1 - 0.20) = $96.000. 2) Al incrementar un 20% sobre dicho valor: $96.000 × (1 + 0.20) = $115.200. Error común (opción A): pensar que un aumento del 20% compensa exactamente una rebaja previa del 20%, omitiendo que la base de cálculo cambió.",
+    "dificultad": 2,
+    "fuente_version": {
+      "origen": "original",
+      "guia": "2026-2 (por confirmar)",
+      "fecha": "2026-10"
+    },
+    "estado_revision": "borrador"
+  },
+  {
+    "id_pregunta": "RC-002",
+    "modulo": "razonamiento_cuantitativo",
+    "competencia_tema": "interpretacion_graficas_tablas",
+    "enunciado": "Un laboratorio registra la cantidad de usuarios concurrentes de una plataforma en 4 servidores durante una hora pico:\n- Servidor 1: 450 usuarios (capacidad máxima: 500)\n- Servidor 2: 300 usuarios (capacidad máxima: 600)\n- Servidor 3: 720 usuarios (capacidad máxima: 800)\n- Servidor 4: 250 usuarios (capacidad máxima: 250)\n\n¿Cuál servidor presenta la mayor tasa porcentual de ocupación respecto a su propia capacidad?",
+    "tipo_pregunta": "seleccion_multiple_unica",
+    "opciones": {
+      "A": "Servidor 4 (100%)",
+      "B": "Servidor 1 (90%)",
+      "C": "Servidor 3 (90%)",
+      "D": "Servidor 2 (50%)"
+    },
+    "respuesta_correcta": "A",
+    "explicacion": "Calculando la tasa de ocupación: Servidor 1 = 450/500 = 90%; Servidor 2 = 300/600 = 50%; Servidor 3 = 720/800 = 90%; Servidor 4 = 250/250 = 100%. Por tanto, el Servidor 4 tiene la ocupación porcentual más alta. La opción C tiene más usuarios absolutos pero menor porcentaje relativo.",
+    "dificultad": 1,
+    "fuente_version": {
+      "origen": "original",
+      "guia": "2026-2 (por confirmar)",
+      "fecha": "2026-10"
+    },
+    "estado_revision": "borrador"
+  },
+  {
+    "id_pregunta": "RC-003",
+    "modulo": "razonamiento_cuantitativo",
+    "competencia_tema": "probabilidad_estadistica",
+    "enunciado": "En una caja de repuestos de servidores hay 12 discos mecánicos (HDD) y 8 unidades de estado sólido (SSD). Se extrae una unidad al azar y resulta ser SSD, la cual se instala en un equipo y no se devuelve a la caja. Inmediatamente después, se extrae una segunda unidad al azar.\n\n¿Cuál es la probabilidad de que esta segunda unidad sea un disco mecánico (HDD)?",
+    "tipo_pregunta": "seleccion_multiple_unica",
+    "opciones": {
+      "A": "12/20 (60%)",
+      "B": "12/19 (aprox. 63,15%)",
+      "C": "7/19 (aprox. 36,84%)",
+      "D": "11/19 (aprox. 57,89%)"
+    },
+    "respuesta_correcta": "B",
+    "explicacion": "Inicialmente había 20 unidades. Al extraer un SSD sin reemplazo, el total de unidades restantes es 19. El número de discos HDD permanece intacto en 12. Por lo tanto, P(HDD en segunda extracción) = 12/19. La opción A olvida restar la primera unidad del total. La opción C calcula la probabilidad de otro SSD (7/19).",
+    "dificultad": 2,
+    "fuente_version": {
+      "origen": "original",
+      "guia": "2026-2 (por confirmar)",
+      "fecha": "2026-10"
+    },
+    "estado_revision": "borrador"
+  },
+  {
+    "id_pregunta": "RC-004",
+    "modulo": "razonamiento_cuantitativo",
+    "competencia_tema": "algebra_proporciones",
+    "enunciado": "Tres impresoras 3D de idénticas especificaciones trabajando de manera continua tardan 8 horas en fabricar un lote de 60 piezas mecánicas. Si se requiere producir 150 piezas del mismo tipo utilizando 5 impresoras idénticas a las anteriores,\n\n¿cuántas horas tomará completar dicha producción?",
+    "tipo_pregunta": "seleccion_multiple_unica",
+    "opciones": {
+      "A": "12 horas",
+      "B": "10 horas",
+      "C": "15 horas",
+      "D": "8 horas"
+    },
+    "respuesta_correcta": "A",
+    "explicacion": "Calculamos la tasa de trabajo: 3 impresoras producen 60 piezas en 8 horas, por lo que cada impresora produce 60 / (3 × 8) = 2.5 piezas por hora. Con 5 impresoras, la tasa combinada es 5 × 2.5 = 12.5 piezas por hora. Para 150 piezas: Tiempo = 150 / 12.5 = 12 horas. Las demás opciones resultan de planteamientos erróneos de regla de tres directa e inversa.",
+    "dificultad": 3,
+    "fuente_version": {
+      "origen": "original",
+      "guia": "2026-2 (por confirmar)",
+      "fecha": "2026-10"
+    },
+    "estado_revision": "borrador"
+  },
+  {
+    "id_pregunta": "CC-001",
+    "modulo": "competencias_ciudadanas",
+    "competencia_tema": "mecanismos_constitucionales",
+    "enunciado": "Una comunidad rural identifica que los vertimientos químicos de una fábrica vecina están contaminando de forma directa la única fuente de agua potable de su acueducto veredal, provocando cuadros agudos de intoxicación infantil y vulnerando de manera inmediata su derecho a la salud y a la vida digna.\n\n¿Cuál es el mecanismo constitucional más idóneo y expedito que pueden interponer los ciudadanos para solicitar la protección inmediata de estos derechos fundamentales?",
+    "tipo_pregunta": "seleccion_multiple_unica",
+    "opciones": {
+      "A": "Acción de Tutela, dado que existe conexidad directa con derechos fundamentales como la vida y la salud en inminente vulneración.",
+      "B": "Referendo derogatorio, para someter a votación popular la revocatoria de la licencia de la empresa.",
+      "C": "Demanda de inconstitucionalidad contra el Código de Recursos Naturales ante la Corte Constitucional.",
+      "D": "Habeas Corpus, solicitando la libertad inmediata de los integrantes del acueducto comunitario."
+    },
+    "respuesta_correcta": "A",
+    "explicacion": "La Acción de Tutela (artículo 86 de la Constitución Política de Colombia) es el mecanismo expedito para reclamar ante los jueces la protección inmediata de derechos fundamentales cuando estos resulten vulnerados o amenazados, en este caso la vida y salud por conexidad con el daño ambiental. La opción B y C son mecanismos de participación o control abstracto normativo no expeditos frente a un peligro inminente; D aplica a privación arbitraria de la libertad.",
+    "dificultad": 2,
+    "fuente_version": {
+      "origen": "original",
+      "guia": "2026-2 (por confirmar)",
+      "fecha": "2026-10"
+    },
+    "estado_revision": "borrador"
+  },
+  {
+    "id_pregunta": "CC-002",
+    "modulo": "competencias_ciudadanas",
+    "competencia_tema": "pluralismo_diversidad",
+    "enunciado": "En una institución universitaria pública, un grupo de estudiantes de comunidades indígenas solicita utilizar su vestimenta tradicional durante ceremonias de grado oficiales. El consejo directivo debate si debe exigirse el traje formal occidental o si debe garantizarse dicha solicitud.\n\nDesde el principio de diversidad étnica y cultural consagrado en la Constitución colombiana, ¿cuál decisión es armónica con los postulados democráticos?",
+    "tipo_pregunta": "seleccion_multiple_unica",
+    "opciones": {
+      "A": "Permitir el uso de la indumentaria tradicional, reconociendo el valor del pluralismo y el libre desarrollo de la identidad cultural sin discriminación.",
+      "B": "Prohibir los atuendos tradicionales para preservar una supuesta uniformidad estética obligatoria en recintos académicos.",
+      "C": "Exigir una póliza de cumplimiento económico a los estudiantes que decidan portar su vestuario ancestral.",
+      "D": "Delegar la decisión a una votación anónima entre todos los asistentes foráneos a la ceremonia."
+    },
+    "respuesta_correcta": "A",
+    "explicacion": "El artículo 7 de la Constitución reconoce y protege la diversidad étnica y cultural de la Nación. Permitir las vestimentas tradicionales materializa el derecho a la identidad cultural y a la no discriminación. La opción B vulnera principios constitucionales en favor de una uniformidad sin sustento en derechos fundamentales. C y D imponen barreras arbitrarias e injustificadas.",
+    "dificultad": 1,
+    "fuente_version": {
+      "origen": "original",
+      "guia": "2026-2 (por confirmar)",
+      "fecha": "2026-10"
+    },
+    "estado_revision": "borrador"
+  },
+  {
+    "id_pregunta": "CC-003",
+    "modulo": "competencias_ciudadanas",
+    "competencia_tema": "analisis_conflictos_intereses",
+    "enunciado": "La alcaldía de un municipio costero proyecta la construcción de un malecón turístico de alta densidad para reactivar el comercio formal. Por su parte, la asociación de pescadores artesanales manifiesta que las obras afectarán irreparablemente las zonas de desove y sus atracaderos tradicionales de subsistencia.\n\n¿Qué tensión de intereses fundamentales se hace evidente en esta situación?",
+    "tipo_pregunta": "seleccion_multiple_unica",
+    "opciones": {
+      "A": "El impulso del desarrollo económico y el turismo frente a la preservación del derecho al trabajo tradicional y la seguridad alimentaria local.",
+      "B": "La defensa de la soberanía monetaria nacional frente a convenios multilaterales de telecomunicaciones.",
+      "C": "El choque entre el régimen penal juvenil y los protocolos de tránsito marítimo internacional.",
+      "D": "La discordia exclusiva entre dos partidos políticos por la adjudicación de frecuencias radiales comunitarias."
+    },
+    "respuesta_correcta": "A",
+    "explicacion": "El conflicto plantea claramente la pugna legítima entre políticas públicas de crecimiento económico/turismo y el derecho a la subsistencia, trabajo y preservación cultural y ambiental de comunidades pesqueras tradicionales. Las opciones B, C y D aluden a materias jurídicas o políticas ajenas a la controversia descrita.",
+    "dificultad": 2,
+    "fuente_version": {
+      "origen": "original",
+      "guia": "2026-2 (por confirmar)",
+      "fecha": "2026-10"
+    },
+    "estado_revision": "borrador"
+  },
+  {
+    "id_pregunta": "CC-004",
+    "modulo": "competencias_ciudadanas",
+    "competencia_tema": "organizacion_del_estado",
+    "enunciado": "El Congreso de la República aprueba una ley que restringe sustancialmente el derecho a la huelga pacífica en sectores no esenciales. Varios sindicatos consideran que la norma transgrede convenios internacionales ratificados por Colombia y preceptos constitucionales.\n\n¿A qué órgano del poder público le corresponde realizar el examen de constitucionalidad definitivo de dicha ley ordinaria?",
+    "tipo_pregunta": "seleccion_multiple_unica",
+    "opciones": {
+      "A": "A la Corte Constitucional, mediante el control ejercido tras demanda ciudadana de inconstitucionalidad.",
+      "B": "Al Ministerio de Trabajo, mediante circular administrativa interna.",
+      "C": "A la Procuraduría General de la Nación, a través de pliego de cargos disciplinario.",
+      "D": "A la Registraduría Nacional del Estado Civil, mediante recuento electoral."
+    },
+    "respuesta_correcta": "A",
+    "explicacion": "De acuerdo con el artículo 241 de la Constitución Política, la Corte Constitucional es la encargada de guardar la integridad y supremacía de la Carta, revisando la constitucionalidad de las leyes cuando sean demandadas por los ciudadanos. Las entidades B, C y D cumplen funciones ejecutivas, de control disciplinario y electorales respectivamente, sin competencia jurisdiccional de control abstracto de constitucionalidad.",
+    "dificultad": 2,
+    "fuente_version": {
+      "origen": "original",
+      "guia": "2026-2 (por confirmar)",
+      "fecha": "2026-10"
+    },
+    "estado_revision": "borrador"
+  },
+  {
+    "id_pregunta": "IN-001",
+    "modulo": "ingles",
+    "competencia_tema": "comprension_avisos",
+    "enunciado": "You see the following notice in a university computer lab:\n\n'Notice: All lab workstations will shut down automatically at 9:45 PM for system updates. Please save your work to the cloud or an external drive before 9:40 PM.'\n\nWhere would you most likely see this notice and what is its primary instruction?",
+    "tipo_pregunta": "seleccion_multiple_unica",
+    "opciones": {
+      "A": "In a cafeteria, asking students to return food trays before dinner.",
+      "B": "In a computer room, advising users to back up their files prior to scheduled maintenance.",
+      "C": "At an airport gate, announcing immediate flight cancellations due to bad weather.",
+      "D": "In a sports gym, requesting athletes to clean fitness equipment after workout."
+    },
+    "respuesta_correcta": "B",
+    "explicacion": "The notice explicitly addresses computer lab workstations, shutdown times, system updates, and saving files to storage devices. Option B accurately summarizes the context and instruction. Options A, C, and D describe irrelevant settings and actions.",
+    "dificultad": 1,
+    "fuente_version": {
+      "origen": "original",
+      "guia": "2026-2 (por confirmar)",
+      "fecha": "2026-10"
+    },
+    "estado_revision": "borrador"
+  },
+  {
+    "id_pregunta": "IN-002",
+    "modulo": "ingles",
+    "competencia_tema": "completar_conversaciones",
+    "enunciado": "Complete the conversation between two engineering students:\n\nAlex: 'Could you help me test this database connection query before the demonstration?'\nSofia: '________________________, let me just finish pushing my current commit.'",
+    "tipo_pregunta": "seleccion_multiple_unica",
+    "opciones": {
+      "A": "Sure thing, give me two minutes",
+      "B": "I never drink cold water in the evening",
+      "C": "Last week the weather was rainy",
+      "D": "You should turn off the lights"
+    },
+    "respuesta_correcta": "A",
+    "explicacion": "Alex asks for a brief favor in an academic/technical context. Sofia's second clause explains she is wrapping up a task ('let me just finish pushing my current commit'), which matches the affirmative agreement 'Sure thing, give me two minutes' (Option A). The other options are completely nonsensical in dialogue context.",
+    "dificultad": 1,
+    "fuente_version": {
+      "origen": "original",
+      "guia": "2026-2 (por confirmar)",
+      "fecha": "2026-10"
+    },
+    "estado_revision": "borrador"
+  },
+  {
+    "id_pregunta": "IN-003",
+    "modulo": "ingles",
+    "competencia_tema": "gramatica_estructuras",
+    "enunciado": "Select the correct option to complete the technical sentence:\n\n'If the software team ________ the security patch yesterday, the unauthorized access attempt would have been prevented.'",
+    "tipo_pregunta": "seleccion_multiple_unica",
+    "opciones": {
+      "A": "deployed",
+      "B": "had deployed",
+      "C": "will deploy",
+      "D": "deploys"
+    },
+    "respuesta_correcta": "B",
+    "explicacion": "This sentence requires the third conditional (hypothetical past event): 'If + Past Perfect (had deployed), would have + Past Participle (would have been prevented)'. Option B provides the grammatically correct past perfect form.",
+    "dificultad": 2,
+    "fuente_version": {
+      "origen": "original",
+      "guia": "2026-2 (por confirmar)",
+      "fecha": "2026-10"
+    },
+    "estado_revision": "borrador"
+  },
+  {
+    "id_pregunta": "IN-004",
+    "modulo": "ingles",
+    "competencia_tema": "comprension_lectura_academica",
+    "enunciado": "Read the short paragraph:\n'Although artificial intelligence tools offer rapid code suggestions, software developers must continually verify edge cases and security vulnerabilities. Relying blindly on automated synthesis often introduces subtle logic bugs that automated linters cannot detect.'\n\nAccording to the passage, why is human developer oversight essential when utilizing AI code assistants?",
+    "tipo_pregunta": "seleccion_multiple_unica",
+    "opciones": {
+      "A": "Because AI models refuse to write functions longer than ten lines of code.",
+      "B": "Because automated generators may introduce delicate logical errors requiring careful inspection.",
+      "C": "Because computers will be banned from enterprise engineering in the near future.",
+      "D": "Because linters always correct all possible memory leaks without developer intervention."
+    },
+    "respuesta_correcta": "B",
+    "explicacion": "The text directly states that blind reliance introduces subtle logic bugs that linters cannot catch, necessitating developer verification. Option B paraphrases this main point accurately. Options A, C, and D distort or contradict the passage.",
+    "dificultad": 2,
+    "fuente_version": {
+      "origen": "original",
+      "guia": "2026-2 (por confirmar)",
+      "fecha": "2026-10"
+    },
+    "estado_revision": "borrador"
+  },
+  {
+    "id_pregunta": "IS-001",
+    "modulo": "ingenieria_sistemas",
+    "competencia_tema": "pensamiento_algoritmico",
+    "enunciado": "Se requiere determinar si una clave existe dentro de un arreglo unidimensional de 'n' números enteros ordenados de forma ascendente. El algoritmo toma el elemento central, compara el valor y descarta recursivamente la mitad del arreglo que no contiene la clave.\n\n¿Cuál es la complejidad temporal asintótica en el peor de los casos de esta búsqueda binaria?",
+    "tipo_pregunta": "seleccion_multiple_unica",
+    "opciones": {
+      "A": "O(log n)",
+      "B": "O(n)",
+      "C": "O(n²)",
+      "D": "O(1)"
+    },
+    "respuesta_correcta": "A",
+    "explicacion": "La búsqueda binaria sobre un arreglo ordenado divide el espacio de búsqueda a la mitad en cada iteración o llamada recursiva (T(n) = T(n/2) + O(1)), lo que arroja una complejidad temporal logarítmica O(log n). O(n) corresponde a la búsqueda lineal y O(1) al caso de acceso directo indexado.",
+    "dificultad": 2,
+    "fuente_version": {
+      "origen": "original",
+      "guia": "2026-2 (por confirmar)",
+      "fecha": "2026-10"
+    },
+    "estado_revision": "borrador"
+  },
+  {
+    "id_pregunta": "IS-002",
+    "modulo": "ingenieria_sistemas",
+    "competencia_tema": "bases_de_datos",
+    "enunciado": "En un sistema de gestión académica relacional, un estudiante puede estar matriculado en varias asignaturas simultáneamente, y cada asignatura cuenta con múltiples estudiantes inscritos. Para representar adecuadamente esta cardinalidad muchos a muchos (N:M) en la tercera forma normal (3NF), ¿cuál diseño es el correcto?",
+    "tipo_pregunta": "seleccion_multiple_unica",
+    "opciones": {
+      "A": "Crear una tabla intermedia asociativa (p. ej. 'matriculas') cuyas claves foráneas apunten a las claves primarias de estudiante y asignatura.",
+      "B": "Almacenar una lista de identificadores de asignaturas separados por comas en una sola columna de texto en la tabla estudiante.",
+      "C": "Duplicar la fila completa del estudiante por cada asignatura en una tabla desnormalizada sin clave primaria.",
+      "D": "Agregar 50 columnas fijas numeradas (asignatura_1, asignatura_2, etc.) en la tabla estudiante."
+    },
+    "respuesta_correcta": "A",
+    "explicacion": "El modelado relacional normalizado para relaciones N:M requiere una tabla asociativa/puente con claves foráneas referenciando a ambas entidades principales, garantizando integridad referencial y atomicidad. Las opciones B y D violan la primera forma normal (1NF), y C genera redundancia y anomalías de actualización.",
+    "dificultad": 2,
+    "fuente_version": {
+      "origen": "original",
+      "guia": "2026-2 (por confirmar)",
+      "fecha": "2026-10"
+    },
+    "estado_revision": "borrador"
+  },
+  {
+    "id_pregunta": "IS-003",
+    "modulo": "ingenieria_sistemas",
+    "competencia_tema": "arquitectura_software",
+    "enunciado": "En una arquitectura orientada a servicios móviles, se necesita garantizar que los datos guardados sin conexión en el teléfono inteligente se sincronicen con el servidor central mediante peticiones HTTP que no generen registros duplicados ante fallas de red o reintentos sucesivos.\n\n¿Qué principio de diseño en la API REST asegura esta propiedad?",
+    "tipo_pregunta": "seleccion_multiple_unica",
+    "opciones": {
+      "A": "Idempotencia, utilizando identificadores únicos (UUID) generados en el cliente y operaciones de inserción condicional (UPSERT).",
+      "B": "Eliminar todos los registros locales antes de enviar la petición de red para ahorrar memoria RAM.",
+      "C": "Permitir únicamente peticiones sincrónicas bloqueantes que suspendan la interfaz hasta recibir respuesta.",
+      "D": "Ignorar los errores de conexión asumiendo que los paquetes perdidos llegarán espontáneamente al servidor."
+    },
+    "respuesta_correcta": "A",
+    "explicacion": "La idempotencia garantiza que ejecutar una operación múltiples veces produzca el mismo resultado sin efectos secundarios adicionales ni duplicación. Generar el UUID en el cliente permite al backend identificar intentos repetidos e ignorar duplicados. Las opciones B, C y D representan antipatrones críticos que degradan la experiencia y causan pérdida de datos.",
+    "dificultad": 2,
+    "fuente_version": {
+      "origen": "original",
+      "guia": "2026-2 (por confirmar)",
+      "fecha": "2026-10"
+    },
+    "estado_revision": "borrador"
+  },
+  {
+    "id_pregunta": "CE-001",
+    "modulo": "comunicacion_escrita",
+    "competencia_tema": "tesis_y_argumentacion",
+    "enunciado": "Consigna de redacción para práctica:\n\n'En los últimos años, la adopción de herramientas de inteligencia artificial en la formación universitaria ha generado un intenso debate entre quienes consideran que deteriora las capacidades analíticas de los futuros profesionales y quienes defienden que constituye una competencia indispensable para el mercado laboral actual.\n\nEscriba un texto argumentativo en el que exponga su postura personal respecto al impacto de la inteligencia artificial en la formación profesional y la ética académica. Su texto debe plantear una tesis clara, presentar argumentos respaldados por razones y ejemplos pertinentes, y mantener un orden lógico y cohesivo entre párrafos.'",
+    "tipo_pregunta": "respuesta_abierta_rubrica",
+    "opciones": {},
+    "respuesta_correcta": "Criterios de evaluación orientativos: 1) Planteamiento de tesis clara y delimitada. 2) Argumentación sólida con evidencias y ejemplos concretos. 3) Estructura coherente con introducción, desarrollo y conclusión. 4) Cohesión, conectores lógicos y corrección gramatical.",
+    "explicacion": "Guía orientativa de autoevaluación: Un texto argumentativo efectivo en Saber Pro debe plantear explícitamente la postura en el primer párrafo, defenderla mediante al menos dos argumentos distintos con ejemplos reales, anticipar o refutar posibles objeciones, y cerrar con una conclusión que sintetice los hallazgos.",
+    "dificultad": 2,
+    "fuente_version": {
+      "origen": "original",
+      "guia": "2026-2 (por confirmar)",
+      "fecha": "2026-10"
+    },
+    "estado_revision": "borrador"
+  }
+]

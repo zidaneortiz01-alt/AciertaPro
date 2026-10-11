@@ -1,0 +1,160 @@
+{
+  "version": "2026-2-v1",
+  "fuente": "Guía de orientación Saber Pro 2026-2, ICFES",
+  "actualizado_en": "2026-10-11T00:00:00Z",
+  "modulos": {
+    "razonamiento_cuantitativo": {
+      "nombre": "Razonamiento Cuantitativo",
+      "preguntas_examen": 30,
+      "opciones_por_defecto": 4,
+      "opciones_por_defecto_nota": "[por confirmar]",
+      "competencias": [
+        {
+          "id": "interpretacion_representacion",
+          "nombre": "Interpretación y representación",
+          "porcentaje_objetivo": 33
+        },
+        {
+          "id": "formulacion_ejecucion",
+          "nombre": "Formulación y ejecución",
+          "porcentaje_objetivo": 33
+        },
+        {
+          "id": "argumentacion",
+          "nombre": "Argumentación",
+          "porcentaje_objetivo": 34
+        }
+      ],
+      "contextos": [
+        "familiar/personal",
+        "laboral/ocupacional",
+        "divulgación científica",
+        "comunitario/social"
+      ],
+      "contenidos": [
+        "estadística",
+        "geometría",
+        "álgebra y cálculo"
+      ]
+    },
+    "lectura_critica": {
+      "nombre": "Lectura Crítica",
+      "preguntas_examen": 30,
+      "opciones_por_defecto": 4,
+      "opciones_por_defecto_nota": "[por confirmar]",
+      "max_palabras_texto": 500,
+      "afirmaciones": [
+        {
+          "id": "afirmacion_1",
+          "nombre": "1. Identificar y entender los contenidos locales que conforman un texto",
+          "porcentaje_objetivo": 26
+        },
+        {
+          "id": "afirmacion_2",
+          "nombre": "2. Comprender cómo se articulan las partes de un texto para darle un sentido global",
+          "porcentaje_objetivo": 40
+        },
+        {
+          "id": "afirmacion_3",
+          "nombre": "3. Reflexionar a partir de un texto y evaluar su contenido",
+          "porcentaje_objetivo": 34
+        }
+      ],
+      "tipos_texto": [
+        { "tipo": "continuo_literario", "nombre": "Continuo Literario", "porcentaje": 15 },
+        { "tipo": "continuo_informativo", "nombre": "Continuo Informativo", "porcentaje": 70 },
+        { "tipo": "discontinuo_literario", "nombre": "Discontinuo Literario", "porcentaje": 6 },
+        { "tipo": "discontinuo_informativo", "nombre": "Discontinuo Informativo", "porcentaje": 9 }
+      ]
+    },
+    "competencias_ciudadanas": {
+      "nombre": "Competencias Ciudadanas",
+      "preguntas_examen": 30,
+      "opciones_por_defecto": 4,
+      "opciones_por_defecto_nota": "[por confirmar]",
+      "competencias": [
+        {
+          "id": "conocimientos",
+          "nombre": "Conocimientos",
+          "porcentaje_objetivo": 30
+        },
+        {
+          "id": "argumentacion",
+          "nombre": "Argumentación",
+          "porcentaje_objetivo": 20
+        },
+        {
+          "id": "multiperspectivismo",
+          "nombre": "Multiperspectivismo",
+          "porcentaje_objetivo": 30
+        },
+        {
+          "id": "pensamiento_sistemico",
+          "nombre": "Pensamiento sistémico",
+          "porcentaje_objetivo": 20
+        }
+      ]
+    },
+    "ingles": {
+      "nombre": "Inglés",
+      "preguntas_examen": 45,
+      "partes": [
+        {
+          "parte": 1,
+          "nombre": "Parte 1: Avisos y vocabulario",
+          "porcentaje_objetivo": 11,
+          "opciones_cantidad": 8
+        },
+        {
+          "parte": 2,
+          "nombre": "Parte 2: Emparejamiento de descripciones y palabras",
+          "porcentaje_objetivo": 11,
+          "opciones_cantidad": 3
+        },
+        {
+          "parte": 3,
+          "nombre": "Parte 3: Conversaciones cortas",
+          "porcentaje_objetivo": 11,
+          "opciones_cantidad": 3
+        },
+        {
+          "parte": 4,
+          "nombre": "Parte 4: Texto con espacios (gramática)",
+          "porcentaje_objetivo": 18,
+          "opciones_cantidad": 3
+        },
+        {
+          "parte": 5,
+          "nombre": "Parte 5: Comprensión de lectura literal",
+          "porcentaje_objetivo": 16,
+          "opciones_cantidad": 3
+        },
+        {
+          "parte": 6,
+          "nombre": "Parte 6: Comprensión de lectura inferencial",
+          "porcentaje_objetivo": 11,
+          "opciones_cantidad": 4
+        },
+        {
+          "parte": 7,
+          "nombre": "Parte 7: Texto con espacios (léxico y gramática avanzado)",
+          "porcentaje_objetivo": 22,
+          "opciones_cantidad": 4
+        }
+      ]
+    },
+    "comunicacion_escrita": {
+      "nombre": "Comunicación Escrita",
+      "tareas_examen": 1,
+      "formato": "Texto argumentativo de máximo dos páginas sobre un tema de dominio público",
+      "consigna": "La pregunta pide tomar postura (de acuerdo, en desacuerdo, parcialmente) y justificarla",
+      "formulacion_estandar": "¿Está de acuerdo con la afirmación A?",
+      "criterios_evaluacion": [
+        "Planteamiento",
+        "Organización",
+        "Forma de expresión",
+        "Pertinencia"
+      ]
+    }
+  }
+}

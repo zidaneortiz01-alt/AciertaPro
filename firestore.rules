@@ -1,0 +1,54 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Regla global: SIN ESCRITURAS PÚBLICAS
+    // Nadie sin autenticación puede escribir en ninguna colección.
+
+    // Colección de preguntas en borrador y banco interno:
+    // Solo accesible por docentes con sesión activa y correo verificado autorizado.
+    match /preguntas/{preguntaId} {
+      allow read, write: if request.auth != null &&
+        request.auth.token.email_verified == true &&
+        request.auth.token.email in [
+          'proyectoing2026@gmail.com',
+          'docente.saberpro@institucion.edu.co'
+        ];
+    }
+
+    // Versiones publicadas del banco:
+    // Lectura pública de versiones finales aprobadas.
+    // Escritura restringida estrictamente a docentes autorizados.
+    match /banco_publicado/{versionId} {
+      allow read: if true;
+      allow write: if request.auth != null &&
+        request.auth.token.email_verified == true &&
+        request.auth.token.email in [
+          'proyectoing2026@gmail.com',
+          'docente.saberpro@institucion.edu.co'
+        ];
+    }
+
+    // Reportes estudiantiles:
+    // Escrituras restringidas para evitar spam masivo; sin lecturas públicas.
+    match /reportes_estudiantes/{reporteId} {
+      allow read: if request.auth != null &&
+        request.auth.token.email in ['proyectoing2026@gmail.com'];
+      allow create: if request.resource.data.keys().hasAll(['question_id', 'reason', 'created_at']) &&
+        !request.resource.data.keys().hasAny(['email', 'nombre', 'documento', 'telefono']); // Cero datos personales
+      allow update, delete: if false; // Inmutables
+    }
+
+    // Configuración y matrices oficiales:
+    match /configuracion/{docId} {
+      allow read: if true;
+      allow write: if request.auth != null &&
+        request.auth.token.email in ['proyectoing2026@gmail.com'];
+    }
+
+    // Denegación por defecto para cualquier otra ruta
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

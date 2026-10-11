@@ -1,0 +1,77 @@
+{
+  "version": "v2026.2.1",
+  "reglas_generales": [
+    "1. La pregunta es ORIGINAL: no reproduzcas ni adaptes ítems de ICFES.",
+    "2. Una sola respuesta correcta; distractores plausibles basados en errores de razonamiento comunes.",
+    "3. Contexto colombiano neutro, sin conocimiento especializado.",
+    "4. Estructura exacta con id, módulo, competencia o afirmación, evidencia, tipo_texto o contexto, enunciado, opciones, respuesta_correcta, explicación, dificultad, generado_por_ia=true, modelo, versión_del_prompt, fecha, estado_revision='borrador'.",
+    "5. En Competencias Ciudadanas: no afirmes artículos ni normas si no estás seguro; marca requiere_verificacion_factual=true.",
+    "6. Rotula toda pregunta como 'pregunta de práctica, no oficial'."
+  ],
+  "system_instructions": "Eres un diseñador experto de ítems de evaluación psicométrica para el examen de Estado de la Educación Superior de Colombia (Saber Pro 2026-2). Todas las preguntas deben ser estrictamente originales (nunca reproducciones de cuadernillos del ICFES). Emplea contexto colombiano cotidiano o profesional neutro, sin sesgos ideológicos ni requerir memorización de datos no suministrados. Cada pregunta debe tener una única clave correcta justificada y distractores sustentados en fallos cognitivos frecuentes.",
+  "json_schema_prompt": {
+    "type": "object",
+    "properties": {
+      "id": { "type": "string" },
+      "modulo": { "type": "string" },
+      "competencia_o_afirmacion": { "type": "string" },
+      "evidencia_asociada": { "type": "string" },
+      "tipo_texto_o_contexto": { "type": "string" },
+      "texto_lectura": { "type": "string", "description": "Obligatorio para Lectura Crítica, máximo 500 palabras" },
+      "enunciado": { "type": "string" },
+      "opciones": {
+        "type": "object",
+        "description": "Mapa de letras a texto. 4 opciones (A, B, C, D) para genéricos [por confirmar], o cantidad de la parte en Inglés",
+        "additionalProperties": { "type": "string" }
+      },
+      "respuesta_correcta": { "type": "string", "description": "Letra correspondiente a la clave válida" },
+      "explicacion": {
+        "type": "object",
+        "properties": {
+          "por_que_correcta": { "type": "string" },
+          "por_que_fallan_distractores": { "type": "string" }
+        },
+        "required": ["por_que_correcta", "por_que_fallan_distractores"]
+      },
+      "dificultad": { "type": "integer", "minimum": 1, "maximum": 3 },
+      "generado_por_ia": { "type": "boolean" },
+      "modelo": { "type": "string" },
+      "version_del_prompt": { "type": "string" },
+      "fecha": { "type": "string" },
+      "estado_revision": { "type": "string", "enum": ["borrador"] },
+      "requiere_verificacion_factual": { "type": "boolean" },
+      "rotulo": { "type": "string", "enum": ["pregunta de práctica, no oficial"] },
+      "calculo_verificable": {
+        "type": "object",
+        "description": "Para Razonamiento Cuantitativo: formula matemática evaluable",
+        "properties": {
+          "expresion": { "type": "string" },
+          "resultado_esperado": { "type": "number" }
+        }
+      }
+    },
+    "required": [
+      "id",
+      "modulo",
+      "competencia_o_afirmacion",
+      "evidencia_asociada",
+      "tipo_texto_o_contexto",
+      "enunciado",
+      "opciones",
+      "respuesta_correcta",
+      "explicacion",
+      "dificultad",
+      "generado_por_ia",
+      "modelo",
+      "version_del_prompt",
+      "fecha",
+      "estado_revision",
+      "rotulo"
+    ]
+  },
+  "comunicacion_escrita_template": {
+    "instrucciones": "Genera una tarea de Comunicación Escrita para Saber Pro con tema de dominio público y debate ciudadano.",
+    "formulacion": "¿Está de acuerdo con la afirmación A?",
+    "criterios": ["Planteamiento", "Organización", "Forma de expresión", "Pertinencia"]
+  }
+}

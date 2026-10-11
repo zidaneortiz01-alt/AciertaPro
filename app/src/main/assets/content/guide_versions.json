@@ -1,0 +1,56 @@
+{
+  "version": "2026-2",
+  "fecha": "2026-10",
+  "estado": "por confirmar con la guía ICFES vigente",
+  "nota_aclaratoria": "Las cantidades de preguntas y los tiempos por módulo son valores paramétricos de ejemplo y deben contrastarse con la guía de orientación oficial vigente de Saber Pro.",
+  "modulos": [
+    {
+      "id": "lectura_critica",
+      "nombre": "Lectura Crítica",
+      "tipo": "oficial_generico",
+      "preguntas_simulacro": 35,
+      "tiempo_minutos": 65,
+      "descripcion": "Identificación de tesis, argumentos, supuestos y articulación de textos."
+    },
+    {
+      "id": "razonamiento_cuantitativo",
+      "nombre": "Razonamiento Cuantitativo",
+      "tipo": "oficial_generico",
+      "preguntas_simulacro": 35,
+      "tiempo_minutos": 65,
+      "descripcion": "Interpretación de datos, álgebra básica, geometría, probabilidad y proporciones."
+    },
+    {
+      "id": "competencias_ciudadanas",
+      "nombre": "Competencias Ciudadanas",
+      "tipo": "oficial_generico",
+      "preguntas_simulacro": 35,
+      "tiempo_minutos": 60,
+      "descripcion": "Constitución, derechos y deberes, pluralismo, análisis de argumentos y conflictos sociales."
+    },
+    {
+      "id": "ingles",
+      "nombre": "Inglés",
+      "tipo": "oficial_generico",
+      "preguntas_simulacro": 45,
+      "tiempo_minutos": 60,
+      "descripcion": "Comprensión lectora, avisos cotidianos, intercambios conversacionales y vocabulario."
+    },
+    {
+      "id": "comunicacion_escrita",
+      "nombre": "Comunicación Escrita",
+      "tipo": "oficial_generico",
+      "preguntas_simulacro": 1,
+      "tiempo_minutos": 40,
+      "descripcion": "Producción de un texto argumentativo con tesis, desarrollo coherente y cohesión."
+    },
+    {
+      "id": "ingenieria_sistemas",
+      "nombre": "Refuerzo: Ingeniería de Sistemas",
+      "tipo": "refuerzo_carrera",
+      "preguntas_simulacro": 30,
+      "tiempo_minutos": 60,
+      "descripcion": "Refuerzo complementario del programa: algoritmia, bases de datos y arquitectura de software. No reemplaza módulos específicos oficiales."
+    }
+  ]
+}
