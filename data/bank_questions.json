@@ -29,7 +29,7 @@
     "generado_por_ia": true,
     "modelo": "gemini-2.5-flash",
     "version_del_prompt": "v2026.2.1",
-    "fecha": "2026-10-11T12:00:03.323Z",
+    "fecha": "2026-10-12T22:25:47.665Z",
     "estado_revision": "aprobada",
     "rotulo": "pregunta de práctica, no oficial"
   },
@@ -51,6 +51,22 @@
   },
   {
     "id": "q_para_reportar_1791720003326",
+    "modulo": "razonamiento_cuantitativo",
+    "enunciado": "Pregunta con posible error tipográfico en enunciado.",
+    "estado_revision": "en_revision",
+    "motivo_en_revision": "Alcanzó el umbral de 3 reportes de estudiantes",
+    "reportes_recibidos": 3
+  },
+  {
+    "id": "q_para_reportar_1791722403850",
+    "modulo": "razonamiento_cuantitativo",
+    "enunciado": "Pregunta con posible error tipográfico en enunciado.",
+    "estado_revision": "en_revision",
+    "motivo_en_revision": "Alcanzó el umbral de 3 reportes de estudiantes",
+    "reportes_recibidos": 3
+  },
+  {
+    "id": "q_para_reportar_1791843947667",
     "modulo": "razonamiento_cuantitativo",
     "enunciado": "Pregunta con posible error tipográfico en enunciado.",
     "estado_revision": "en_revision",

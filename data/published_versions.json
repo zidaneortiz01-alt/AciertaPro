@@ -1,6 +1,76 @@
 [
   {
     "version": "vTest-1.0.0",
+    "generated_at": "2026-10-12T22:25:47.666Z",
+    "sha256": "27a2c259712d19fd8ed4459d3b98ae1e33c068634b1b9b05077d719374fe4acc",
+    "publicado_por": "admin@aciertapro.edu.co",
+    "cantidad_preguntas": 1,
+    "questions": [
+      {
+        "id": "q_approved_test",
+        "modulo": "razonamiento_cuantitativo",
+        "competencia_o_afirmacion": "interpretacion_representacion",
+        "evidencia_asociada": "Evidencia",
+        "tipo_texto_o_contexto": "familiar",
+        "enunciado": "Pregunta aprobada para publicación inmutable.",
+        "opciones": {
+          "A": "1",
+          "B": "2",
+          "C": "3",
+          "D": "4"
+        },
+        "respuesta_correcta": "A",
+        "explicacion": {
+          "por_que_correcta": "ok",
+          "por_que_fallan_distractores": "fallo"
+        },
+        "dificultad": 1,
+        "generado_por_ia": true,
+        "modelo": "gemini-2.5-flash",
+        "version_del_prompt": "v2026.2.1",
+        "fecha": "2026-10-12T22:25:47.665Z",
+        "estado_revision": "aprobada",
+        "rotulo": "pregunta de práctica, no oficial"
+      }
+    ]
+  },
+  {
+    "version": "vTest-1.0.0",
+    "generated_at": "2026-10-11T12:40:03.848Z",
+    "sha256": "99c708179964d8e1b4f59c61cc200e2bb6b6118f5dc6190d59fbe73f7663b6d7",
+    "publicado_por": "admin@aciertapro.edu.co",
+    "cantidad_preguntas": 1,
+    "questions": [
+      {
+        "id": "q_approved_test",
+        "modulo": "razonamiento_cuantitativo",
+        "competencia_o_afirmacion": "interpretacion_representacion",
+        "evidencia_asociada": "Evidencia",
+        "tipo_texto_o_contexto": "familiar",
+        "enunciado": "Pregunta aprobada para publicación inmutable.",
+        "opciones": {
+          "A": "1",
+          "B": "2",
+          "C": "3",
+          "D": "4"
+        },
+        "respuesta_correcta": "A",
+        "explicacion": {
+          "por_que_correcta": "ok",
+          "por_que_fallan_distractores": "fallo"
+        },
+        "dificultad": 1,
+        "generado_por_ia": true,
+        "modelo": "gemini-2.5-flash",
+        "version_del_prompt": "v2026.2.1",
+        "fecha": "2026-10-11T12:40:03.847Z",
+        "estado_revision": "aprobada",
+        "rotulo": "pregunta de práctica, no oficial"
+      }
+    ]
+  },
+  {
+    "version": "vTest-1.0.0",
     "generated_at": "2026-10-11T12:00:03.324Z",
     "sha256": "7d573c6485b3d23ff517e137a3df7014e34aa6a15b34a8b37b7741469df2435a",
     "publicado_por": "admin@aciertapro.edu.co",
