@@ -32,8 +32,14 @@ interface UserProfileDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertOrUpdate(profile: UserProfileEntity)
 
+    @Query("SELECT * FROM user_profile WHERE email = :email LIMIT 1")
+    suspend fun getProfileByEmail(email: String): UserProfileEntity?
+
     @Query("SELECT * FROM user_profile LIMIT 1")
     suspend fun getProfile(): UserProfileEntity?
+
+    @Query("DELETE FROM user_profile WHERE email = :email")
+    suspend fun deleteByEmail(email: String)
 
     @Query("DELETE FROM user_profile")
     suspend fun deleteAll()

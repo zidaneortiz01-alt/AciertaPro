@@ -2,7 +2,7 @@
  * Acierta Pro — Banco: Lógica del Panel Docente
  */
 
-let currentUserEmail = 'proyectoing2026@gmail.com';
+let currentUserEmail = localStorage.getItem('acierta_email') || 'keilawhp@gmail.com';
 let matrixConfigCache = null;
 let appConfigCache = null;
 

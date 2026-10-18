@@ -16,7 +16,10 @@ const {
   checkDeduplication,
   checkOptionKeyBalance,
   calculateDistributionDeviations,
-  safeEvaluateMathExpression
+  safeEvaluateMathExpression,
+  sanitizeInput,
+  validateJudgeEvaluation,
+  validateEssayRubricEvaluation
 } = require('../src/validators');
 
 const BankStorage = require('../src/bankStorage');
@@ -328,3 +331,69 @@ describe('8. Publicación Inmutable con Huella SHA-256 y Reportes Estudiantiles'
     assert.ok(reloadedQ.motivo_en_revision.includes('umbral de 3 reportes'));
   });
 });
+
+describe('9. Sanitización de Entrada contra SQLi y XSS (Sección 5.2)', () => {
+  test('Limpia etiquetas HTML y tags de script', () => {
+    const malicious = '<script>alert("xss")</script>Texto legítimo <img src=x onerror=alert(1)>';
+    const clean = sanitizeInput(malicious);
+    assert.equal(clean.includes('<script>'), false);
+    assert.equal(clean.includes('<img'), false);
+    assert.ok(clean.includes('Texto legítimo'));
+  });
+
+  test('Neutraliza palabras clave reservadas de manipulación SQL y escapa comillas', () => {
+    const sqlInjection = "1' OR SELECT * FROM public.questions; DROP TABLE public.users; --";
+    const clean = sanitizeInput(sqlInjection);
+    assert.equal(clean.includes('SELECT'), false);
+    assert.equal(clean.includes('DROP'), false);
+    assert.equal(clean.includes("''"), true); // Comillas escapadas
+  });
+});
+
+describe('10. Agente 2: Juez ICFES y Esquema Estricto de Calidad (Sección 2.4)', () => {
+  test('Aprueba pregunta cuando score >= 85 y unambiguity_flag es true', () => {
+    const judgeResult = {
+      overall_score: 92,
+      unambiguity_flag: true,
+      pedagogical_alignment_score: 95,
+      difficulty_calibration: "Medio",
+      rejection_reasons: []
+    };
+    const res = validateJudgeEvaluation(judgeResult);
+    assert.equal(res.valid, true);
+    assert.equal(res.approved, true);
+  });
+
+  test('Rechaza pregunta cuando score < 85 o unambiguity_flag es false', () => {
+    const ambiguousResult = {
+      overall_score: 88,
+      unambiguity_flag: false,
+      pedagogical_alignment_score: 90,
+      difficulty_calibration: "Alto",
+      rejection_reasons: ["Distractor B puede ser interpretado como válido según la redacción"]
+    };
+    const res = validateJudgeEvaluation(ambiguousResult);
+    assert.equal(res.valid, true);
+    assert.equal(res.approved, false);
+  });
+});
+
+describe('11. Rúbrica Oficial de Comunicación Escrita ICFES (Sección 3.1)', () => {
+  test('Valida estructura analítica de 4 dimensiones (1-5) y nivel de desempeño', () => {
+    const rubricResult = {
+      score_cohesion: 4,
+      score_coherencia: 4,
+      score_estructura_argumentativa: 5,
+      score_ortografia_gramatica: 4,
+      performance_level: "Avanzado",
+      qualitative_feedback: {
+        strengths: ["Excelente ilación lógica", "Tesis explícita y contundente"],
+        improvements: ["Enriquecer el vocabulario técnico en el párrafo 2"],
+        general_comment: "El texto demuestra un dominio sobresaliente de la argumentación escrita."
+      }
+    };
+    const res = validateEssayRubricEvaluation(rubricResult);
+    assert.equal(res.valid, true);
+  });
+});
+

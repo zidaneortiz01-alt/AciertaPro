@@ -308,7 +308,22 @@ class SaberProViewModel(
         viewModelScope.launch {
             val result = userDataRepo.loginLocalAccount(email, pass)
             result.onSuccess {
-                _uiState.update { it.copy(feedbackMessage = null, errorMessage = null) }
+                val profile = userDataRepo.getProfile()
+                refreshDomainStats(profile)
+                _uiState.update { it.copy(profile = profile, feedbackMessage = null, errorMessage = null) }
+                onSuccess()
+            }.onFailure { ex ->
+                _uiState.update { it.copy(errorMessage = ex.message) }
+            }
+        }
+    }
+
+    fun loginWithGoogle(email: String, displayName: String, onSuccess: () -> Unit) {
+        viewModelScope.launch {
+            val result = userDataRepo.loginWithGoogle(email, displayName)
+            result.onSuccess { profile ->
+                refreshDomainStats(profile)
+                _uiState.update { it.copy(profile = profile, hasLocalAccount = true, feedbackMessage = null, errorMessage = null) }
                 onSuccess()
             }.onFailure { ex ->
                 _uiState.update { it.copy(errorMessage = ex.message) }
@@ -319,7 +334,7 @@ class SaberProViewModel(
     fun deleteLocalAccount(onDeleted: () -> Unit) {
         viewModelScope.launch {
             userDataRepo.deleteLocalAccountOnly()
-            _uiState.update { it.copy(hasLocalAccount = false, feedbackMessage = "Cuenta local eliminada.") }
+            _uiState.update { it.copy(hasLocalAccount = false, profile = com.example.domain.model.UserProfile(), feedbackMessage = "Cuenta local eliminada.") }
             onDeleted()
         }
     }
@@ -754,6 +769,17 @@ class SaberProViewModel(
     }
 
     fun logout() {
-        navigateTo(Screen.AUTH)
+        viewModelScope.launch {
+            userDataRepo.logout()
+            _uiState.update {
+                UiState(
+                    currentScreen = Screen.AUTH,
+                    allQuestions = it.allQuestions,
+                    guideModules = it.guideModules,
+                    guideVersionInfo = it.guideVersionInfo,
+                    syncStatus = it.syncStatus
+                )
+            }
+        }
     }
 }

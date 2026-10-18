@@ -33,7 +33,10 @@ data class Question(
     val dificultad: Int = 2,
     val fuente_version: FuenteVersion = FuenteVersion(),
     val estado_revision: String = "borrador",
-    val clave_original_por_mostrada: Map<String, String> = emptyMap()
+    val clave_original_por_mostrada: Map<String, String> = emptyMap(),
+    val mediaUrlsJson: String = "[]",
+    val mediaType: String = "image",
+    val altTextAccessibility: String? = null
 )
 
 data class Attempt(
@@ -68,10 +71,19 @@ data class QuestionProgress(
     val dueAt: Long = 0L // Momento exacto de vencimiento Leitner
 )
 
+enum class UserRole(val label: String) {
+    STUDENT("Estudiante"),
+    TEACHER("Docente"),
+    SUPERUSER("Superusuario")
+}
+
 data class UserProfile(
     val id: String = UUID.randomUUID().toString(),
     val name: String = "",
     val email: String = "",
+    val role: UserRole = UserRole.STUDENT,
+    val isGoogleAccount: Boolean = false,
+    val photoUrl: String? = null,
     val academicProgram: String = "Ingeniería de Sistemas",
     val campus: String = "Sede Maicao",
     val enabledModules: List<String> = listOf(
@@ -88,7 +100,10 @@ data class UserProfile(
     val hasConsented: Boolean = false,
     val consentDate: String = "",
     val consentVersion: String = "Ley 1581 v1.0",
-    val isDarkMode: Boolean = false
+    val isDarkMode: Boolean = false,
+    val isAdjustedBooklet: Boolean = false,
+    val includesEnglishTest: Boolean = true,
+    val disabilityType: String? = null
 )
 
 data class GuideModuleConfig(

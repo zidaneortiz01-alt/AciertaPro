@@ -10,7 +10,14 @@ const fs = require('fs');
 const BankStorage = require('./src/bankStorage');
 const GenerationQueue = require('./src/generationQueue');
 const GeminiServerClient = require('./src/geminiClient');
-const { calculateDistributionDeviations, checkOptionKeyBalance } = require('./src/validators');
+const UserStorage = require('./src/userStorage');
+const {
+  calculateDistributionDeviations,
+  checkOptionKeyBalance,
+  sanitizeInput,
+  validateJudgeEvaluation,
+  validateEssayRubricEvaluation
+} = require('./src/validators');
 
 const app = express();
 const PORT = 3000;
@@ -34,6 +41,7 @@ let promptTemplates = loadJson(promptTemplatesPath, {});
 
 // Clientes y módulos del core
 const bankStorage = new BankStorage(appConfig);
+const userStorage = new UserStorage(appConfig);
 const geminiClient = new GeminiServerClient(process.env.GEMINI_API_KEY, appConfig.gemini_model || 'gemini-2.5-flash');
 const generationQueue = new GenerationQueue(geminiClient, bankStorage, appConfig, matrixConfig, promptTemplates);
 
@@ -175,20 +183,32 @@ function seedInitialQuestionsIfEmpty() {
 
 seedInitialQuestionsIfEmpty();
 
-// --- MIDDLEWARE DE AUTORIZACIÓN DOCENTE ---
+// --- MIDDLEWARE DE AUTORIZACIÓN DOCENTE / SUPERUSUARIO (RBAC) ---
 function requireAuthorizedTeacher(req, res, next) {
-  const authEmail = req.headers['x-user-email'] || req.query.user_email || 'proyectoing2026@gmail.com';
-  const authorizedList = (appConfig.authorized_emails || []).map(e => e.toLowerCase());
+  const token = req.headers['authorization']?.replace('Bearer ', '') || req.headers['x-session-token'];
+  const session = token ? userStorage.getSession(token) : null;
+  const authEmail = session ? session.email : (req.headers['x-user-email'] || req.query.user_email);
 
-  if (!authEmail || !authorizedList.includes(authEmail.toLowerCase())) {
+  if (!authEmail) {
+    return res.status(401).json({
+      error: "Acceso no autenticado. Por favor inicie sesión como docente o superusuario.",
+      is_authorized: false,
+      role: "invitado"
+    });
+  }
+
+  const isAllowed = userStorage.isSuperuserOrTeacher(authEmail);
+  if (!isAllowed) {
     return res.status(403).json({
-      error: "Acceso denegado: solo correos de la lista autorizada pueden generar, revisar y publicar.",
-      email_recibido: authEmail || null,
-      solicitud: "Contacte al administrador para registrar su correo en authorized_emails."
+      error: "Acceso denegado: esta función es exclusiva de docentes y superusuarios.",
+      email_recibido: authEmail,
+      role: "estudiante",
+      is_authorized: false
     });
   }
 
   req.userEmail = authEmail;
+  req.userRole = session ? session.role : userStorage.determineRole(authEmail);
   next();
 }
 
@@ -343,15 +363,133 @@ app.post('/api/v1/essay-feedback', async (req, res) => {
 // 2. ENDPOINTS DEL PANEL DOCENTE (Acceso restringido a correos autorizados)
 // =========================================================================
 
+// =========================================================================
+// ENDPOINTS DE AUTENTICACIÓN GOOGLE, SESIÓN Y ROLES (RBAC)
+// =========================================================================
+
 /**
- * Estado de autenticación y correo del usuario
+ * Autenticación mediante Google Sign-In
+ * Recibe credenciales de cuenta de Google, busca o crea el usuario en la base de datos
+ * y asigna rol de superusuario (si está en lista autorizada) o de estudiante.
+ */
+app.post('/api/auth/google', (req, res) => {
+  try {
+    const { email, name, picture, google_id, academic_program, campus } = req.body;
+    if (!email) {
+      return res.status(400).json({ error: "El correo electrónico es requerido." });
+    }
+
+    const { user, token } = userStorage.findOrCreateGoogleUser({
+      email,
+      name,
+      picture,
+      google_id,
+      academic_program,
+      campus
+    });
+
+    res.json({
+      success: true,
+      user,
+      token,
+      is_authorized: user.role === 'superusuario' || user.role === 'docente'
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+/**
+ * Inicio de sesión o cambio de cuenta
+ */
+app.post('/api/auth/login', (req, res) => {
+  try {
+    const { email } = req.body;
+    if (!email) {
+      return res.status(400).json({ error: "El correo electrónico es requerido." });
+    }
+
+    const { user, token } = userStorage.loginLocalOrDemo(email);
+    res.json({
+      success: true,
+      user,
+      token,
+      is_authorized: user.role === 'superusuario' || user.role === 'docente'
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+/**
+ * Obtener perfil del usuario en sesión activa
+ */
+app.get('/api/auth/me', (req, res) => {
+  const token = req.headers['authorization']?.replace('Bearer ', '') || req.headers['x-session-token'];
+  const session = token ? userStorage.getSession(token) : null;
+  const email = session ? session.email : (req.headers['x-user-email'] || req.query.user_email);
+
+  if (!email) {
+    return res.json({
+      authenticated: false,
+      user: null,
+      role: 'invitado',
+      is_authorized: false
+    });
+  }
+
+  const user = userStorage.getUserByEmail(email) || {
+    email,
+    name: email.split('@')[0],
+    role: userStorage.determineRole(email)
+  };
+
+  res.json({
+    authenticated: true,
+    user,
+    role: user.role,
+    is_authorized: user.role === 'superusuario' || user.role === 'docente'
+  });
+});
+
+/**
+ * Cierre de sesión y destrucción de token
+ */
+app.post('/api/auth/logout', (req, res) => {
+  const token = req.headers['authorization']?.replace('Bearer ', '') || req.headers['x-session-token'];
+  if (token) {
+    userStorage.removeSession(token);
+  }
+  res.json({ success: true, message: "Sesión cerrada correctamente" });
+});
+
+/**
+ * Estado de autenticación y rol actual del usuario
  */
 app.get('/api/teacher/auth-status', (req, res) => {
-  const currentEmail = req.headers['x-user-email'] || req.query.user_email || 'proyectoing2026@gmail.com';
-  const isAuth = (appConfig.authorized_emails || []).map(e => e.toLowerCase()).includes(currentEmail.toLowerCase());
+  const token = req.headers['authorization']?.replace('Bearer ', '') || req.headers['x-session-token'];
+  const session = token ? userStorage.getSession(token) : null;
+  const currentEmail = session ? session.email : (req.headers['x-user-email'] || req.query.user_email);
+
+  if (!currentEmail) {
+    return res.json({
+      email: null,
+      is_authorized: false,
+      role: 'invitado',
+      authorized_list: appConfig.authorized_emails
+    });
+  }
+
+  const isAuth = userStorage.isSuperuserOrTeacher(currentEmail);
+  const user = userStorage.getUserByEmail(currentEmail);
+  const role = user ? user.role : (isAuth ? 'superusuario' : 'estudiante');
+
   res.json({
     email: currentEmail,
     is_authorized: isAuth,
+    role: role,
+    user_name: user ? user.name : currentEmail.split('@')[0],
+    picture: user ? user.picture : null,
     authorized_list: appConfig.authorized_emails
   });
 });
@@ -494,6 +632,138 @@ app.post('/api/teacher/writing-topics', requireAuthorizedTeacher, (req, res) => 
   res.json({ success: true, topic });
 });
 
+/**
+ * Catálogo completo de módulos (5 genéricos + 35 específicos del ICFES)
+ */
+app.get('/api/modules', (req, res) => {
+  const genericModules = Object.entries(matrixConfig.modulos || {}).map(([id, conf]) => ({
+    id,
+    name: conf.nombre,
+    category_type: 'generic',
+    preguntas_examen: conf.preguntas_examen || 30
+  }));
+
+  const specificModules = (matrixConfig.modulos_especificos || []).map(m => ({
+    id: m.id,
+    name: m.nombre,
+    category_type: 'specific',
+    categoria: m.categoria
+  }));
+
+  res.json({
+    total: genericModules.length + specificModules.length,
+    generic: genericModules,
+    specific: specificModules
+  });
+});
+
+/**
+ * Balanceador dinámico de módulos prioritarios para el pipeline batch (Sección 2.3)
+ * Equivalente de fn_get_priority_modules_for_batch(target)
+ */
+app.get('/api/modules/priority', (req, res) => {
+  const target = parseInt(req.query.target) || 100;
+  const approvedQuestions = bankStorage.getAllQuestions().filter(q => q.estado_revision === 'aprobada');
+  const countsByModule = {};
+  approvedQuestions.forEach(q => {
+    countsByModule[q.modulo] = (countsByModule[q.modulo] || 0) + 1;
+  });
+
+  const allModules = [
+    ...Object.entries(matrixConfig.modulos || {}).map(([id, conf]) => ({
+      module_id: id,
+      module_name: conf.nombre,
+      category_type: 'generic'
+    })),
+    ...(matrixConfig.modulos_especificos || []).map(m => ({
+      module_id: m.id,
+      module_name: m.nombre,
+      category_type: 'specific'
+    }))
+  ];
+
+  const deficits = allModules.map(m => {
+    const current = countsByModule[m.module_id] || 0;
+    const deficit = Math.max(0, target - current);
+    return {
+      module_id: m.module_id,
+      module_name: m.module_name,
+      category_type: m.category_type,
+      current_count: current,
+      deficit
+    };
+  })
+  .filter(m => m.deficit > 0)
+  .sort((a, b) => b.deficit - a.deficit || (a.category_type === 'generic' ? -1 : 1))
+  .slice(0, 5);
+
+  res.json({
+    target,
+    priority_modules: deficits
+  });
+});
+
+/**
+ * Agente 2: Juez ICFES sobre una pregunta específica (Sección 2.4)
+ */
+app.post('/api/questions/:id/judge', requireAuthorizedTeacher, async (req, res) => {
+  const { id } = req.params;
+  const question = bankStorage.getQuestionById(id);
+  if (!question) {
+    return res.status(404).json({ error: 'Pregunta no encontrada' });
+  }
+
+  try {
+    const judgeResult = await geminiClient.auditQuestionAsJudge(question);
+    const validation = validateJudgeEvaluation(judgeResult);
+
+    if (validation.approved) {
+      bankStorage.reviewQuestion(id, 'aprobar', 'Aprobada automáticamente por Agente 2 (Juez ICFES) con score ' + judgeResult.overall_score, 'Agente 2 (Juez ICFES)');
+    }
+
+    res.json({
+      success: true,
+      evaluation: judgeResult,
+      validation
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+/**
+ * Evaluación de Comunicación Escrita mediante Rúbrica Oficial ICFES (Sección 3.1)
+ * Aplica sanitización de entrada, control de rate limit y esquema rígido.
+ */
+app.post('/api/essays/evaluate', async (req, res) => {
+  const { essay_text, prompt_affirmation } = req.body;
+  if (!essay_text || essay_text.trim().length < 50) {
+    return res.status(400).json({ error: 'El ensayo debe contener al menos 50 caracteres para ser evaluado.' });
+  }
+
+  const sanitizedEssay = sanitizeInput(essay_text);
+  const sanitizedPrompt = sanitizeInput(prompt_affirmation || '');
+
+  try {
+    const evaluation = await geminiClient.evaluateOfficialEssayRubric({
+      essayText: sanitizedEssay,
+      promptAffirmation: sanitizedPrompt
+    });
+
+    const validation = validateEssayRubricEvaluation(evaluation);
+    if (!validation.valid) {
+      return res.status(502).json({ error: 'La respuesta del evaluador no satisfizo el esquema oficial.' });
+    }
+
+    res.json({
+      success: true,
+      evaluation
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 // Iniciar servidor
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`=======================================================`);
@@ -501,3 +771,4 @@ app.listen(PORT, '0.0.0.0', () => {
   console.log(`Runtime de servidor con integración Firebase y Gemini`);
   console.log(`=======================================================`);
 });
+

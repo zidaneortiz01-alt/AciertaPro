@@ -71,6 +71,60 @@ class UserDataRepository(
         Result.success(Unit)
     }
 
+    private var currentUserEmail: String? = null
+
+    fun setCurrentUserEmail(email: String?) {
+        currentUserEmail = email
+    }
+
+    fun getCurrentUserEmail(): String? = currentUserEmail
+
+    fun determineRole(email: String?): com.example.domain.model.UserRole {
+        val clean = email?.trim()?.lowercase() ?: return com.example.domain.model.UserRole.STUDENT
+        return if (clean == "proyectoing2026@gmail.com" || clean == "docente.saberpro@institucion.edu.co") {
+            com.example.domain.model.UserRole.SUPERUSER
+        } else {
+            com.example.domain.model.UserRole.STUDENT
+        }
+    }
+
+    suspend fun loginWithGoogle(email: String, displayName: String): Result<com.example.domain.model.UserProfile> = withContext(Dispatchers.Default) {
+        val trimmedEmail = email.trim()
+        currentUserEmail = trimmedEmail
+        val role = determineRole(trimmedEmail)
+
+        var entity = database.userProfileDao().getProfileByEmail(trimmedEmail)
+        if (entity == null) {
+            val isoDate = java.text.SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", java.util.Locale.US).apply {
+                timeZone = java.util.TimeZone.getTimeZone("UTC")
+            }.format(java.util.Date())
+
+            entity = UserProfileEntity(
+                id = java.util.UUID.randomUUID().toString(),
+                name = displayName.ifBlank { trimmedEmail.split("@")[0] },
+                email = trimmedEmail,
+                academicProgram = "Ingeniería de Sistemas",
+                campus = "Sede Maicao",
+                enabledModulesJson = org.json.JSONArray(listOf("lectura_critica", "razonamiento_cuantitativo", "competencias_ciudadanas", "ingles", "comunicacion_escrita", "ingenieria_sistemas")).toString(),
+                targetDate = "Noviembre 2026",
+                studyDaysPerWeek = 4,
+                sessionMinutes = 30,
+                hasConsented = true,
+                consentDate = isoDate,
+                consentVersion = "Google Auth v1.0",
+                isDarkMode = false
+            )
+            database.userProfileDao().insertOrUpdate(entity)
+        }
+
+        val profile = getProfile()
+        Result.success(profile)
+    }
+
+    suspend fun logout() {
+        currentUserEmail = null
+    }
+
     suspend fun loginLocalAccount(email: String, password: String): Result<Boolean> = withContext(Dispatchers.Default) {
         val trimmedEmail = email.trim()
         val account = database.localAccountDao().getByEmail(trimmedEmail)
@@ -84,6 +138,7 @@ class UserDataRepository(
             iterations = parsed.iterations
         )
         if (matches) {
+            currentUserEmail = trimmedEmail
             // Re-hashear automáticamente si el hash proviene de iteraciones heredadas o formato anterior
             if (parsed.isLegacy || parsed.iterations < PasswordHasher.DEFAULT_ITERATIONS) {
                 val upgradedHash = PasswordHasher.hashPassword(password.toCharArray())
@@ -105,6 +160,7 @@ class UserDataRepository(
 
     suspend fun deleteLocalAccountOnly() {
         database.localAccountDao().deleteAll()
+        currentUserEmail = null
     }
 
     // =========================================================================
@@ -185,7 +241,14 @@ class UserDataRepository(
     }
 
     suspend fun getProfile(): UserProfile {
-        val entity = database.userProfileDao().getProfile() ?: return UserProfile()
+        val email = currentUserEmail
+        val entity = if (!email.isNullOrBlank()) {
+            database.userProfileDao().getProfileByEmail(email) ?: database.userProfileDao().getProfile()
+        } else {
+            database.userProfileDao().getProfile()
+        } ?: return UserProfile(email = email ?: "", role = determineRole(email))
+
+        val role = determineRole(entity.email)
         val modulesList = mutableListOf<String>()
         try {
             val arr = JSONArray(entity.enabledModulesJson)
@@ -202,6 +265,8 @@ class UserDataRepository(
             id = entity.id,
             name = entity.name,
             email = entity.email,
+            role = role,
+            isGoogleAccount = entity.consentVersion.contains("Google"),
             academicProgram = entity.academicProgram,
             campus = entity.campus,
             enabledModules = modulesList,

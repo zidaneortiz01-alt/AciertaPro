@@ -156,5 +156,43 @@
         "Pertinencia"
       ]
     }
-  }
+  },
+  "modulos_especificos": [
+    { "id": "analisis_economico", "nombre": "Análisis Económico", "categoria": "Ciencias Económicas" },
+    { "id": "atencion_salud", "nombre": "Atención en Salud", "categoria": "Salud" },
+    { "id": "cuidado_enfermeria_clinico_comunitario", "nombre": "Cuidado de Enfermería en los Ámbitos Clínico y Comunitario", "categoria": "Salud" },
+    { "id": "comunicacion_juridica", "nombre": "Comunicación Jurídica", "categoria": "Derecho" },
+    { "id": "diseno_software", "nombre": "Diseño de Software", "categoria": "Ingeniería" },
+    { "id": "ensenar_formar_evaluar", "nombre": "Enseñar, Formar, Evaluar", "categoria": "Educación" },
+    { "id": "pensamiento_cientifico", "nombre": "Pensamiento Científico", "categoria": "Educación y Ciencias" },
+    { "id": "formulacion_proyectos_ingenieria", "nombre": "Formulación de Proyectos de Ingeniería", "categoria": "Ingeniería" },
+    { "id": "gestion_conflicto", "nombre": "Gestión del Conflicto", "categoria": "Derecho y Ciencias Sociales" },
+    { "id": "gestion_organizaciones", "nombre": "Gestión de Organizaciones", "categoria": "Administración" },
+    { "id": "investigacion_ciencias_sociales", "nombre": "Investigación en Ciencias Sociales", "categoria": "Ciencias Sociales" },
+    { "id": "diseno_sistemas_productivos", "nombre": "Diseño de Sistemas Productivos y Logísticos", "categoria": "Ingeniería" },
+    { "id": "diseno_mecanico", "nombre": "Diseño Mecánico", "categoria": "Ingeniería" },
+    { "id": "fundamentacion_diagnostico_tratamiento_medico", "nombre": "Fundamentación en Diagnóstico y Tratamiento Médico", "categoria": "Salud" },
+    { "id": "salud_publica", "nombre": "Salud Pública", "categoria": "Salud" },
+    { "id": "produccion_agricola", "nombre": "Producción Agrícola", "categoria": "Ciencias Agrarias" },
+    { "id": "produccion_pecuaria", "nombre": "Producción Pecuaria", "categoria": "Ciencias Agrarias" },
+    { "id": "gestion_ambiental", "nombre": "Gestión Ambiental", "categoria": "Medio Ambiente e Ingeniería" },
+    { "id": "intervencion_psicologica", "nombre": "Intervención Psicológica", "categoria": "Psicología" },
+    { "id": "evaluacion_diagnostico_psicologico", "nombre": "Evaluación y Diagnóstico Psicológico", "categoria": "Psicología" },
+    { "id": "procesos_psicologicos", "nombre": "Procesos Psicológicos", "categoria": "Psicología" },
+    { "id": "derecho_publico", "nombre": "Derecho Público", "categoria": "Derecho" },
+    { "id": "derecho_privado", "nombre": "Derecho Privado", "categoria": "Derecho" },
+    { "id": "informacion_control_financiero", "nombre": "Información y Control Financiero", "categoria": "Ciencias Económicas" },
+    { "id": "gestion_financiera", "nombre": "Gestión Financiera", "categoria": "Ciencias Económicas" },
+    { "id": "tributaria", "nombre": "Tributaria", "categoria": "Ciencias Económicas" },
+    { "id": "arquitectura_proyectos", "nombre": "Proyecto de Arquitectura", "categoria": "Arquitectura y Urbanismo" },
+    { "id": "urbanismo", "nombre": "Urbanismo", "categoria": "Arquitectura y Urbanismo" },
+    { "id": "diseno_comunicacion_visual", "nombre": "Diseño de Comunicación Visual", "categoria": "Diseño" },
+    { "id": "diseno_industrial", "nombre": "Diseño Industrial", "categoria": "Diseño" },
+    { "id": "comunicacion_social_periodismo", "nombre": "Comunicación Social y Periodismo", "categoria": "Comunicación" },
+    { "id": "educacion_pedagogia", "nombre": "Educación y Pedagogía", "categoria": "Educación" },
+    { "id": "ciencias_farmaceuticas", "nombre": "Ciencias Farmacéuticas", "categoria": "Salud" },
+    { "id": "procesamiento_alimentos", "nombre": "Procesamiento de Alimentos", "categoria": "Ingeniería y Alimentos" },
+    { "id": "infraestructura_vial", "nombre": "Infraestructura Vial y de Transporte", "categoria": "Ingeniería Civil" }
+  ]
 }
+

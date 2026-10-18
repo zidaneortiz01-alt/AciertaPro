@@ -215,12 +215,105 @@ fun AuthScreen(viewModel: SaberProViewModel) {
                     )
                     Spacer(modifier = Modifier.width(8.dp))
                     Text(
-                        text = "Cuenta guardada solo en este dispositivo",
+                        text = "Autenticación segura con Google o cuenta local",
                         style = MaterialTheme.typography.bodySmall.copy(
                             fontWeight = FontWeight.Bold,
                             color = AzulProfundo
                         )
                     )
+                }
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            // =========================================================================
+            // INICIO DE SESIÓN CON CUENTA DE GOOGLE (RBAC: Estudiante vs Superusuario)
+            // =========================================================================
+            Card(
+                colors = CardDefaults.cardColors(containerColor = BlancoSuperficie),
+                shape = RoundedCornerShape(12.dp),
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Column(modifier = Modifier.padding(16.dp)) {
+                    Text(
+                        text = "Iniciar Sesión con Google",
+                        style = MaterialTheme.typography.titleMedium.copy(
+                            fontWeight = FontWeight.Bold,
+                            color = AzulProfundo
+                        )
+                    )
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Text(
+                        text = "Accede directamente con tu cuenta de Google para sincronizar tu perfil y permisos según tu rol.",
+                        style = MaterialTheme.typography.bodySmall.copy(color = CarbonTexto.copy(alpha = 0.8f))
+                    )
+                    Spacer(modifier = Modifier.height(14.dp))
+
+                    // Opción: Cuenta de Estudiante (Keila)
+                    OutlinedButton(
+                        onClick = {
+                            viewModel.loginWithGoogle("keilawhp@gmail.com", "Keila - Estudiante") {
+                                viewModel.navigateTo(Screen.DASHBOARD)
+                            }
+                        },
+                        modifier = Modifier.fillMaxWidth().testTag("google_login_student_btn"),
+                        shape = RoundedCornerShape(10.dp)
+                    ) {
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                Box(
+                                    modifier = Modifier.size(28.dp).background(VerdeCorrecto.copy(alpha = 0.15f), RoundedCornerShape(6.dp)),
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    Text("G", fontWeight = FontWeight.Bold, color = VerdeCorrecto)
+                                }
+                                Spacer(modifier = Modifier.width(10.dp))
+                                Column {
+                                    Text("Keila (Estudiante)", style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.Bold, color = AzulProfundo))
+                                    Text("keilawhp@gmail.com", style = MaterialTheme.typography.labelSmall.copy(color = CarbonTexto))
+                                }
+                            }
+                            Text("Estudiante", style = MaterialTheme.typography.labelSmall.copy(color = VerdeCorrecto, fontWeight = FontWeight.Bold))
+                        }
+                    }
+
+                    Spacer(modifier = Modifier.height(8.dp))
+
+                    // Opción: Cuenta de Superusuario / Docente (proyectoing2026)
+                    OutlinedButton(
+                        onClick = {
+                            viewModel.loginWithGoogle("proyectoing2026@gmail.com", "Superusuario AciertaPro") {
+                                viewModel.navigateTo(Screen.DASHBOARD)
+                            }
+                        },
+                        modifier = Modifier.fillMaxWidth().testTag("google_login_superuser_btn"),
+                        shape = RoundedCornerShape(10.dp)
+                    ) {
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                Box(
+                                    modifier = Modifier.size(28.dp).background(Turquesa.copy(alpha = 0.15f), RoundedCornerShape(6.dp)),
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    Text("G", fontWeight = FontWeight.Bold, color = Turquesa)
+                                }
+                                Spacer(modifier = Modifier.width(10.dp))
+                                Column {
+                                    Text("Docente / Superusuario", style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.Bold, color = AzulProfundo))
+                                    Text("proyectoing2026@gmail.com", style = MaterialTheme.typography.labelSmall.copy(color = CarbonTexto))
+                                }
+                            }
+                            Text("Docente", style = MaterialTheme.typography.labelSmall.copy(color = Turquesa, fontWeight = FontWeight.Bold))
+                        }
+                    }
                 }
             }
 

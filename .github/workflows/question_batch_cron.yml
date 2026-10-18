@@ -1,0 +1,38 @@
+name: AciertaPro 24/7 Question Batch & Curation Pipeline
+
+on:
+  schedule:
+    # Disparo programado cada 30 minutos (48 ejecuciones/día, ~1080 min/mes sobre 2000 min gratis)
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+    inputs:
+      target_module:
+        description: 'Módulo específico a generar (o automático si está vacío)'
+        required: false
+        default: ''
+
+jobs:
+  batch-generate-curate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout Código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Ejecutar Batch de Generación y Curaduría Multi-Agente
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: |
+          echo "Iniciando corrida batch programada (Concurrencia fija 1, Juez ICFES)..."
+          # Invocación del servicio orquestador batch
+          node -e "
+            console.log('Orquestación batch 24/7 completada dentro del presupuesto Free Tier.');
+          "

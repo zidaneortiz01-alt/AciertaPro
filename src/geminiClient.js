@@ -272,10 +272,191 @@ Texto del estudiante:
       }
     };
 
-    const response = await this.callGeminiApi(model, payload);
+  async callGeminiApiWithRetry(modelName, payload, maxRetries = 3) {
+    let lastError = null;
+    for (let attempt = 0; attempt < maxRetries; attempt++) {
+      try {
+        return await this.callGeminiApi(modelName, payload);
+      } catch (err) {
+        lastError = err;
+        const isRateLimit = err.message && (err.message.includes('429') || err.message.includes('ResourceExhausted') || err.message.includes('Too Many Requests'));
+        const isTransient = err.message && (err.message.includes('503') || err.message.includes('500') || err.message.includes('Timeout'));
+        if ((isRateLimit || isTransient) && attempt < maxRetries - 1) {
+          // Algoritmo de backoff exponencial con jitter (Sección 4.2)
+          const delayMs = Math.pow(2, attempt) * 1000 + Math.floor(Math.random() * 500);
+          console.warn(`[GeminiClient] Reintento ${attempt + 1}/${maxRetries} tras error: ${err.message}. Esperando ${delayMs}ms...`);
+          await new Promise(res => setTimeout(res, delayMs));
+          continue;
+        }
+        throw err;
+      }
+    }
+    throw lastError;
+  }
+
+  /**
+   * Agente 2: Juez ICFES (Control de calidad y curaduría formal multi-agente, Sección 2.4)
+   * JSON Schema rígido con score global, unambiguity_flag, y calibración.
+   */
+  async auditQuestionAsJudge(question, modelName) {
+    const model = modelName || this.defaultModel;
+
+    const judgePrompt = `
+Actúa como el Agente 2 (Juez Técnico y Pedagógico ICFES) para el examen Saber Pro 2026-2.
+Audita exhaustivamente la calidad de la siguiente pregunta de práctica diseñada por el Agente 1 (Creador).
+
+Criterios de evaluación obligatorios:
+1. Validez de constructo y marco ICFES: ¿Mide con precisión la competencia del módulo?
+2. Unambiguity (Unicidad y claridad): ¿Existe UNA Y SOLO UNA opción correcta indiscutible? ¿El enunciado o los distractores contienen ambigüedad?
+3. Calidad de distractores: ¿Representan errores cognitivos o de cálculo típicos sin ser engañosos ni absurdos?
+4. Calibración de dificultad: Bajo, Medio o Alto.
+
+Pregunta a auditar:
+- Módulo: ${question.modulo}
+- Competencia/Afirmación: ${question.competencia_o_afirmacion || question.competencia_tema || ''}
+- Enunciado: ${question.enunciado}
+- Texto/Contexto: ${question.texto_lectura || question.tipo_texto_o_contexto || 'N/A'}
+- Opciones:
+${Object.entries(question.opciones || {}).map(([k, v]) => `  ${k}: ${v}`).join('\n')}
+- Clave correcta: ${question.respuesta_correcta}
+- Explicación brindada: ${JSON.stringify(question.explicacion || {})}
+
+Devuelve tu evaluación estructurada estricta cumpliendo el JSON Schema requerido.
+`;
+
+    const payload = {
+      contents: [{ role: 'user', parts: [{ text: judgePrompt }] }],
+      generationConfig: {
+        temperature: 0.1,
+        responseMimeType: 'application/json',
+        responseSchema: {
+          type: 'object',
+          properties: {
+            overall_score: {
+              type: 'integer',
+              minimum: 0,
+              maximum: 100,
+              description: 'Puntaje global de calidad pedagógica y técnica (0-100).'
+            },
+            unambiguity_flag: {
+              type: 'boolean',
+              description: 'True si existe una única respuesta correcta indiscutible y el lenguaje es claro.'
+            },
+            pedagogical_alignment_score: {
+              type: 'integer',
+              minimum: 0,
+              maximum: 100,
+              description: 'Evaluación del alineamiento con el marco de referencia del ICFES.'
+            },
+            difficulty_calibration: {
+              type: 'string',
+              enum: ['Bajo', 'Medio', 'Alto']
+            },
+            rejection_reasons: {
+              type: 'array',
+              items: { type: 'string' },
+              description: 'Lista de observaciones técnicas si el puntaje es menor a 85.'
+            }
+          },
+          required: [
+            'overall_score',
+            'unambiguity_flag',
+            'pedagogical_alignment_score',
+            'difficulty_calibration',
+            'rejection_reasons'
+          ]
+        }
+      }
+    };
+
+    const response = await this.callGeminiApiWithRetry(model, payload);
     const candidateText = response?.candidates?.[0]?.content?.parts?.[0]?.text;
+    if (!candidateText) {
+      throw new Error('El Agente 2 (Juez ICFES) no devolvió una evaluación parseable.');
+    }
+
+    return JSON.parse(candidateText);
+  }
+
+  /**
+   * Evaluación oficial de Comunicación Escrita según Rúbrica ICFES (Sección 3.1)
+   * 4 dimensiones oficiales (1-5), nivel de desempeño y feedback cualitativo.
+   */
+  async evaluateOfficialEssayRubric({ essayText, promptAffirmation, modelName }) {
+    const model = modelName || this.defaultModel;
+
+    const evaluationPrompt = `
+Eres el evaluador pedagógico experto del módulo de Comunicación Escrita para el examen de Estado Saber Pro (ICFES Colombia).
+Evalúa el ensayo argumentativo del estudiante frente a la siguiente afirmación/consigna:
+"${promptAffirmation || 'Toma de postura justificada ante una problemática de interés público'}"
+
+Aplica estrictamente la rúbrica oficial analítica en 4 dimensiones (Escala 1 a 5 cada una):
+1. Cohesión (score_cohesion: 1..5): Conectores lógicos, ilación sintáctica y fluidez entre oraciones.
+2. Coherencia (score_coherencia: 1..5): Hilo conductor, ausencia de contradicciones y progresión temática.
+3. Estructura Argumentativa (score_estructura_argumentativa: 1..5): Planteamiento de tesis, desarrollo de premisas justificadas y conclusión coherente.
+4. Corrección Ortográfica y Gramatical (score_ortografia_gramatica: 1..5): Reglas de ortografía, tildes, puntuación y concordancia verbal/nominal.
+
+Determina el nivel de desempeño global (performance_level):
+- "Insuficiente" (Promedio < 2.5)
+- "Mínimo" (2.5 <= Promedio < 3.5)
+- "Satisfactorio" (3.5 <= Promedio < 4.5)
+- "Avanzado" (Promedio >= 4.5)
+
+Incluye retroalimentación cualitativa detallada con fortalezas, aspectos a mejorar y comentario general.
+
+Texto del ensayo:
+"""
+${essayText}
+"""
+`;
+
+    const payload = {
+      contents: [{ role: 'user', parts: [{ text: evaluationPrompt }] }],
+      generationConfig: {
+        temperature: 0.2,
+        responseMimeType: 'application/json',
+        responseSchema: {
+          type: 'object',
+          properties: {
+            score_cohesion: { type: 'integer', minimum: 1, maximum: 5 },
+            score_coherencia: { type: 'integer', minimum: 1, maximum: 5 },
+            score_estructura_argumentativa: { type: 'integer', minimum: 1, maximum: 5 },
+            score_ortografia_gramatica: { type: 'integer', minimum: 1, maximum: 5 },
+            performance_level: {
+              type: 'string',
+              enum: ['Insuficiente', 'Mínimo', 'Satisfactorio', 'Avanzado']
+            },
+            qualitative_feedback: {
+              type: 'object',
+              properties: {
+                strengths: { type: 'array', items: { type: 'string' } },
+                improvements: { type: 'array', items: { type: 'string' } },
+                general_comment: { type: 'string' }
+              },
+              required: ['strengths', 'improvements', 'general_comment']
+            }
+          },
+          required: [
+            'score_cohesion',
+            'score_coherencia',
+            'score_estructura_argumentativa',
+            'score_ortografia_gramatica',
+            'performance_level',
+            'qualitative_feedback'
+          ]
+        }
+      }
+    };
+
+    const response = await this.callGeminiApiWithRetry(model, payload);
+    const candidateText = response?.candidates?.[0]?.content?.parts?.[0]?.text;
+    if (!candidateText) {
+      throw new Error('No se recibió evaluación estructurada para el ensayo.');
+    }
+
     return JSON.parse(candidateText);
   }
 }
 
 module.exports = GeminiServerClient;
+

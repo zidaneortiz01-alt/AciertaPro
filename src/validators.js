@@ -514,6 +514,77 @@ function runFullValidationPipeline(question, options = {}) {
   return results;
 }
 
+/**
+ * Sanitización de entrada contra inyecciones SQL y XSS (Sección 5.2)
+ */
+function sanitizeInput(inputText) {
+  if (!inputText || typeof inputText !== 'string') return '';
+  return inputText
+    // Eliminar etiquetas HTML y fragmentos de código ejecutable (Protección XSS)
+    .replace(/<[^>]*>/g, '')
+    // Escapar comillas simples y dobles para prevenir rompimiento de cadenas en SQL
+    .replace(/'/g, "''")
+    .replace(/"/g, '&quot;')
+    // Remover caracteres de control y nulos
+    .replace(/\0/g, '')
+    // Neutralizar palabras clave reservadas de manipulación SQL (Protección SQLi)
+    .replace(/(ALTER|CREATE|DELETE|DROP|EXEC(UTE)?|INSERT( INTO)?|MERGE|SELECT|UPDATE|UNION( ALL)?)\s+/gui, '')
+    .trim();
+}
+
+/**
+ * Validador de evaluación de calidad del Agente 2 (Juez ICFES) (Sección 2.4)
+ */
+function validateJudgeEvaluation(evalObj) {
+  if (!evalObj || typeof evalObj !== 'object') {
+    return { valid: false, approved: false, error: 'La evaluación del Juez debe ser un objeto JSON válido' };
+  }
+  const { overall_score, unambiguity_flag, pedagogical_alignment_score, difficulty_calibration, rejection_reasons } = evalObj;
+
+  const validScore = typeof overall_score === 'number' && overall_score >= 0 && overall_score <= 100;
+  const validFlag = typeof unambiguity_flag === 'boolean';
+  const validPedagogy = typeof pedagogical_alignment_score === 'number' && pedagogical_alignment_score >= 0 && pedagogical_alignment_score <= 100;
+  const validDiff = ['Bajo', 'Medio', 'Alto'].includes(difficulty_calibration);
+  const validReasons = Array.isArray(rejection_reasons);
+
+  if (!validScore || !validFlag || !validPedagogy || !validDiff || !validReasons) {
+    return { valid: false, approved: false, error: 'Estructura o rangos inválidos en la evaluación del Juez ICFES' };
+  }
+
+  // Criterio de aprobación estricto: puntaje >= 85 y unambiguity_flag true
+  const approved = overall_score >= 85 && unambiguity_flag === true;
+  return { valid: true, approved, overall_score, unambiguity_flag, rejection_reasons };
+}
+
+/**
+ * Validador del esquema de evaluación de Comunicación Escrita (Sección 3.1)
+ */
+function validateEssayRubricEvaluation(evalObj) {
+  if (!evalObj || typeof evalObj !== 'object') {
+    return { valid: false, error: 'Evaluación de ensayo inválida' };
+  }
+  const levels = ['Insuficiente', 'Mínimo', 'Satisfactorio', 'Avanzado'];
+  const scores = [
+    evalObj.score_cohesion,
+    evalObj.score_coherencia,
+    evalObj.score_estructura_argumentativa,
+    evalObj.score_ortografia_gramatica
+  ];
+
+  const scoresValid = scores.every(s => typeof s === 'number' && s >= 1 && s <= 5);
+  const levelValid = levels.includes(evalObj.performance_level);
+  const feedbackValid = evalObj.qualitative_feedback &&
+    Array.isArray(evalObj.qualitative_feedback.strengths) &&
+    Array.isArray(evalObj.qualitative_feedback.improvements) &&
+    typeof evalObj.qualitative_feedback.general_comment === 'string';
+
+  if (!scoresValid || !levelValid || !feedbackValid) {
+    return { valid: false, error: 'Estructura de rúbrica de Comunicación Escrita no cumple con el esquema oficial' };
+  }
+
+  return { valid: true };
+}
+
 module.exports = {
   safeEvaluateMathExpression,
   validateSchema,
@@ -525,5 +596,9 @@ module.exports = {
   checkDeduplication,
   checkOptionKeyBalance,
   calculateDistributionDeviations,
-  runFullValidationPipeline
+  runFullValidationPipeline,
+  sanitizeInput,
+  validateJudgeEvaluation,
+  validateEssayRubricEvaluation
 };
+

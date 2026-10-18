@@ -123,13 +123,30 @@ fun DashboardScreen(viewModel: SaberProViewModel) {
             ) {
                 Column {
                     val displayName = profile.name.trim().ifBlank { "Estudiante" }
-                    Text(
-                        text = "Hola, ${displayName.split(" ").firstOrNull() ?: displayName}",
-                        style = MaterialTheme.typography.titleLarge.copy(
-                            fontWeight = FontWeight.Bold,
-                            color = AzulProfundo
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Text(
+                            text = "Hola, ${displayName.split(" ").firstOrNull() ?: displayName}",
+                            style = MaterialTheme.typography.titleLarge.copy(
+                                fontWeight = FontWeight.Bold,
+                                color = AzulProfundo
+                            )
                         )
-                    )
+                        Spacer(modifier = Modifier.width(8.dp))
+                        val isSuper = profile.role == com.example.domain.model.UserRole.SUPERUSER || profile.role == com.example.domain.model.UserRole.TEACHER
+                        Box(
+                            modifier = Modifier
+                                .background(if (isSuper) Turquesa.copy(alpha = 0.15f) else VerdeCorrecto.copy(alpha = 0.15f), RoundedCornerShape(6.dp))
+                                .padding(horizontal = 6.dp, vertical = 2.dp)
+                        ) {
+                            Text(
+                                text = profile.role.label,
+                                style = MaterialTheme.typography.labelSmall.copy(
+                                    fontWeight = FontWeight.Bold,
+                                    color = if (isSuper) Turquesa else VerdeCorrecto
+                                )
+                            )
+                        }
+                    }
                     Text(
                         text = "${profile.academicProgram} · ${profile.campus}",
                         style = MaterialTheme.typography.bodySmall.copy(color = CarbonTexto.copy(alpha = 0.75f))
@@ -351,6 +368,48 @@ fun DashboardScreen(viewModel: SaberProViewModel) {
                     modifier = Modifier.weight(1f),
                     onClick = { viewModel.navigateTo(Screen.PROGRESS_HISTORY) }
                 )
+            }
+
+            // Herramientas de Superusuario / Docente (Visibles ÚNICAMENTE para Superusuarios)
+            if (profile.role == com.example.domain.model.UserRole.SUPERUSER || profile.role == com.example.domain.model.UserRole.TEACHER) {
+                Spacer(modifier = Modifier.height(14.dp))
+                Text(
+                    text = "Herramientas de Docente / Superusuario",
+                    style = MaterialTheme.typography.titleMedium.copy(
+                        fontWeight = FontWeight.Bold,
+                        color = AzulProfundo
+                    )
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                Card(
+                    colors = CardDefaults.cardColors(containerColor = Turquesa.copy(alpha = 0.08f)),
+                    shape = RoundedCornerShape(12.dp),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Column(modifier = Modifier.padding(14.dp)) {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Icon(
+                                imageVector = Icons.Default.Assessment,
+                                contentDescription = null,
+                                tint = Turquesa,
+                                modifier = Modifier.size(22.dp)
+                            )
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Text(
+                                text = "Panel Administrativo ICFES Activo",
+                                style = MaterialTheme.typography.titleSmall.copy(
+                                    fontWeight = FontWeight.Bold,
+                                    color = AzulProfundo
+                                )
+                            )
+                        }
+                        Spacer(modifier = Modifier.height(6.dp))
+                        Text(
+                            text = "Sesión autorizada como Superusuario (${profile.email}). Acceso habilitado a la matriz ICFES 2026-2, auditoría de ítems y estadísticas de banco.",
+                            style = MaterialTheme.typography.bodySmall.copy(color = CarbonTexto, fontSize = 12.sp)
+                        )
+                    }
+                }
             }
 
             Spacer(modifier = Modifier.height(20.dp))
